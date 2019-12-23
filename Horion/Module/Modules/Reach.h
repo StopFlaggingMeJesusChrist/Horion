@@ -1,7 +1,6 @@
 #pragma once
 #include "Module.h"
 
-
 class Reach : public IModule
 {
 private:
@@ -18,4 +17,3 @@ public:
 	virtual void onDisable() override;
 	virtual void onTick(C_GameMode* gm) override;
 };
-

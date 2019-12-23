@@ -1,10 +1,7 @@
 #include "NoSlowDown.h"
 
-
-
 NoSlowDown::NoSlowDown() : IModule(0x0, Category::MOVEMENT, "Don't get slowed down when blocking or eating") {
 }
-
 
 NoSlowDown::~NoSlowDown() {
 }
@@ -28,7 +25,6 @@ void NoSlowDown::onEnable() {
 		*opcode = 0xEB;
 		VirtualProtect(opcode, 1, oldProtect, &oldProtect);
 	}
-	
 }
 
 void NoSlowDown::onDisable() {

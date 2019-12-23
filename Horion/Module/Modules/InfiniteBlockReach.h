@@ -1,7 +1,6 @@
 #pragma once
 #include "Module.h"
 
-
 class InfiniteBlockReach :
 	public IModule
 {
@@ -15,4 +14,3 @@ public:
 	// Inherited via IModule
 	virtual const char* getModuleName() override;
 };
-

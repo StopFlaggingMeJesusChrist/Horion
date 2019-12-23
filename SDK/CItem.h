@@ -157,8 +157,6 @@ private:
 	virtual __int64 _useOn(C_ItemStack&, C_Entity&, vec3_ti, unsigned char, float, float, float)const;
 public:
 
-
-
 	bool isTool(void) {
 		if (getAttackDamage() > 0) return true; // Does Attack Damage
 		if (itemId == 261 || itemId == 262) return true; // Bow
@@ -268,7 +266,6 @@ private:
 		this->vTable = reinterpret_cast<uintptr_t**>(sigOffset + offset + /*length of instruction*/ 7);
 	}
 };
-
 
 class C_ArmorItem : public C_Item {
 private:

@@ -1,11 +1,8 @@
 #include "Bhop.h"
 
-
-
 Bhop::Bhop() : IModule(0x0, Category::MOVEMENT, "Hop around like a bunny!") {
 	registerFloatSetting("Speed", &this->speed, this->speed, 0.1f, 0.8f);
 }
-
 
 Bhop::~Bhop() {
 }
@@ -15,7 +12,6 @@ const char* Bhop::getModuleName() {
 }
 
 void Bhop::onTick(C_GameMode* gm) {
-
 	C_GameSettingsInput* input = g_Data.getClientInstance()->getGameSettingsInput();
 
 	if (gm->player->isInLava() == 1 || gm->player->isInWater() == 1) return;
@@ -23,7 +19,8 @@ void Bhop::onTick(C_GameMode* gm) {
 	if (gm->player->isSneaking()) return;
 
 	if (GameData::canUseMoveKeys() || g_Data.getLocalPlayer()->canOpenContainerScreen() != 1)
-	{ }
+	{
+	}
 	else
 		return;
 
@@ -78,5 +75,4 @@ void Bhop::onTick(C_GameMode* gm) {
 		gm->player->lerpMotion(moveVec);
 		keyPressed = false;
 	}
-
 }

@@ -2,7 +2,7 @@
 
 namespace SlimUtils {
 #pragma region Constructors/Destructors
-	SlimMem::SlimMem(const SlimMem & copy) {
+	SlimMem::SlimMem(const SlimMem& copy) {
 		this->m_dwPID = 0;
 		DuplicateHandle(GetCurrentProcess(), copy.m_hProc, GetCurrentProcess(), &m_hProc, NULL, FALSE, DUPLICATE_SAME_ACCESS);
 	}
@@ -22,11 +22,11 @@ namespace SlimUtils {
 		}
 	}
 
-	bool SlimMem::Open(const wchar_t * lpwstrProcessName, ProcessAccess flags) {
+	bool SlimMem::Open(const wchar_t* lpwstrProcessName, ProcessAccess flags) {
 		return this->Open(lpwstrProcessName, (DWORD)flags);
 	}
 
-	bool SlimMem::Open(const wchar_t * lpwstrProcessName, DWORD flags) {
+	bool SlimMem::Open(const wchar_t* lpwstrProcessName, DWORD flags) {
 		DWORD pid;
 		if (GetPID(lpwstrProcessName, &pid))
 			return this->Open(pid, flags);
@@ -42,7 +42,6 @@ namespace SlimUtils {
 			std::cout << "[!!!] Already have process handle" << std::endl;
 			return false;
 		}
-
 
 		m_hProc = OpenProcess(dwFlags | PROCESS_DUP_HANDLE, false, dwPID);
 		m_dwPID = dwPID;
@@ -60,7 +59,7 @@ namespace SlimUtils {
 	Attempts to find a process with a given name and sets the given PID
 	Returns whether a matching process was found or not
 	*/
-	BOOL SlimMem::GetPID(const wchar_t * lpwstrProcessName, DWORD* pid) {
+	BOOL SlimMem::GetPID(const wchar_t* lpwstrProcessName, DWORD* pid) {
 		PROCESSENTRY32W proc;
 		proc.dwSize = sizeof(PROCESSENTRY32W);
 		HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
@@ -119,7 +118,7 @@ namespace SlimUtils {
 		return true;
 	}
 
-	SigScanResult SlimMem::PerformSigScan(const BYTE * bufPattern, const char * lpcstrMask, const SlimModule * Module, DWORD startFromOffset) {
+	SigScanResult SlimMem::PerformSigScan(const BYTE* bufPattern, const char* lpcstrMask, const SlimModule* Module, DWORD startFromOffset) {
 		auto module = Module;
 		if (module == nullptr)
 			return SigScanResult(false);
@@ -139,9 +138,7 @@ namespace SlimUtils {
 			return SigScanResult(false);
 		}
 
-
-
-		BYTE *dump = new BYTE[module->dwSize];
+		BYTE* dump = new BYTE[module->dwSize];
 
 		SIZE_T bytesRead;
 
@@ -150,13 +147,12 @@ namespace SlimUtils {
 
 		bool found = false;
 		size_t maskSize = mask.size();
-		const char * goodMask = mask.c_str();
+		const char* goodMask = mask.c_str();
 		DWORD count = (DWORD)(module->dwSize - maskSize);
 		for (DWORD i = startFromOffset; i < count; i++) {
 			if (bufPattern[0] == dump[i]) {
 				found = true;
 				for (DWORD idx = 1; idx < maskSize; idx++) {
-
 					if (goodMask[idx] == 0x78 && bufPattern[idx] != dump[i + idx]) {
 						found = false;
 						break;
@@ -174,7 +170,7 @@ namespace SlimUtils {
 		return SigScanResult(false);
 	}
 
-	const SlimModule* SlimMem::GetModule(const wchar_t * lpwstrModuleName) const {
+	const SlimModule* SlimMem::GetModule(const wchar_t* lpwstrModuleName) const {
 		std::wstring name = ToLower(std::wstring(lpwstrModuleName));
 		auto val = m_mModules.find(name);
 		if (val == m_mModules.end())

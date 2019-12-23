@@ -1,6 +1,5 @@
 #include "Loader.h"
 
-
 SlimUtils::SlimMem mem;
 const SlimUtils::SlimModule* gameModule;
 bool isRunning = true;
@@ -63,7 +62,7 @@ DWORD WINAPI analyticsThread(LPVOID lpParam) {
 		ExitThread(0);
 #endif
 	}
-	
+
 	logF("Analytics thread exited.");
 
 	ExitThread(0);
@@ -73,7 +72,7 @@ DWORD WINAPI keyThread(LPVOID lpParam) {
 	logF("Key thread started.");
 
 	bool* keyMap = static_cast<bool*>(malloc(0xFF * 4 + 0x4));
-	if(keyMap == 0)
+	if (keyMap == 0)
 		throw std::exception("Keymap not allocated");
 
 	uintptr_t clickMap = reinterpret_cast<uintptr_t>(malloc(5));
@@ -102,10 +101,9 @@ DWORD WINAPI keyThread(LPVOID lpParam) {
 
 		C_RakNetInstance* rakInstance = g_Data.getRakNetInstance();
 		if (rakInstance != nullptr && rakInstance->serverIp.getTextLength() > 5 &&
-				(strcmp(rakInstance->serverIp.getText(),"play.valeanetwork.eu") == 0 ||
+			(strcmp(rakInstance->serverIp.getText(), "play.valeanetwork.eu") == 0 ||
 				strcmp(rakInstance->serverIp.getText(), "137.74.152.142") == 0 ||
 				strcmp(rakInstance->serverIp.getText(), "pvp.valeanetwork.eu") == 0)) {
-
 			C_GuiData* guiData = g_Data.getClientInstance()->getGuiData();
 
 			if (guiData != nullptr) guiData->displayClientMessageF("%sHorion is not allowed in Valea Network.", RED);
@@ -113,13 +111,13 @@ DWORD WINAPI keyThread(LPVOID lpParam) {
 			isRunning = false;
 			break;
 		}
-		
+
 		for (uintptr_t i = 0; i < 0xFF; i++) {
-			bool* newKey = keyMapAddr + (4 * i); 
+			bool* newKey = keyMapAddr + (4 * i);
 			bool newKeyPressed = (*newKey) && GameData::canUseMoveKeys(); // Disable Keybinds when in chat or inventory
 			bool* oldKey = keyMap + (4 * i);
 			if (newKeyPressed != *oldKey) {
-				moduleMgr->onKeyUpdate((int) i, newKeyPressed);
+				moduleMgr->onKeyUpdate((int)i, newKeyPressed);
 			}
 			if (*newKey != *oldKey) { // Skip Chat or inventory checks
 				TabGui::onKeyUpdate((int)i, *newKey);
@@ -128,7 +126,6 @@ DWORD WINAPI keyThread(LPVOID lpParam) {
 		}
 
 		if (*hidController != 0) {
-			
 			for (uintptr_t key = 0; key < 5; key++) {
 				bool newKey = (*hidController)->clickMap[key];
 				bool* oldKey = reinterpret_cast<bool*>(clickMap + key);
@@ -139,10 +136,10 @@ DWORD WINAPI keyThread(LPVOID lpParam) {
 
 			memcpy(reinterpret_cast<void*>(clickMap), &(*hidController)->leftClickDown, 5);
 		}
-		
+
 		memcpy_s(keyMap, 0xFF * 4, keyMapAddr, 0xFF * 4);
-		
-		Sleep(2); 
+
+		Sleep(2);
 	}
 	logF("Threads exiting...");
 	Sleep(150); // Give the threads a bit of time to exit
@@ -168,7 +165,7 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 	unsigned char magicValues[16] = { 0x00, 0x4F, 0x52, 0x00, 0x49, 0x4F, 0x4E, 0x23, 0x9C, 0x47, 0xFB, 0xFF, 0x7D, 0x9C, 0x42, 0x57 };
 	char* magicArray = new char[sizeof(magicValues) + sizeof(uintptr_t) * 2];
 	memcpy(magicArray, magicValues, sizeof(magicValues));
-	
+
 	logF("Magic array at %llX", magicArray);
 
 	loaderMemory** horionToInjectorPtr = reinterpret_cast<loaderMemory**>(magicArray + sizeof(magicValues));
@@ -198,9 +195,9 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 		QueryPerformanceCounter(&endTime);
 		bool isConnected = horionToInjector->isPresent && injectorToHorion->isPresent && horionToInjector->protocolVersion >= injectorToHorion->protocolVersion;
 
-		if(isConnected && !injectorToHorion->isUnread) {
+		if (isConnected && !injectorToHorion->isUnread) {
 			__int64 elapsed = endTime.QuadPart - timeSinceLastMessage.QuadPart;
-			float realElapsed = (float) elapsed / frequency.QuadPart;
+			float realElapsed = (float)elapsed / frequency.QuadPart;
 			if (realElapsed > 4.f) {
 				isConnected = false;
 				logF("Disconnected from injector due to timeout");
@@ -226,7 +223,7 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 
 			if (injectorToHorion->isUnread) { // They sent us a message
 				QueryPerformanceCounter(&timeSinceLastMessage);
-				switch(injectorToHorion->cmd) {
+				switch (injectorToHorion->cmd) {
 				case CMD_INIT: {
 					logF("Got CMD_INIT from injector");
 					int flags = injectorToHorion->params[0];
@@ -266,16 +263,16 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 					delete[] nextDataPack.data;
 					throw std::exception("Horion Data packet too big to send");
 				}
-					
+
 				horionToInjector->cmd = nextDataPack.cmd;
 				memcpy(horionToInjector->params, nextDataPack.params, sizeof(int) * 5);
 				if (nextDataPack.dataArraySize > 0) {
 					memcpy(horionToInjector->data, nextDataPack.data, nextDataPack.dataArraySize);
 					delete[] nextDataPack.data;
 				}
-					
+
 				horionToInjector->dataSize = nextDataPack.dataArraySize;
-				
+
 				horionToInjector->isUnread = true;
 			}
 		}
@@ -285,8 +282,8 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 	logF("Quitting connection thread");
 	memset(magicValues, 0, sizeof(magicValues));
 	memset(magicArray, 0, sizeof(magicValues + sizeof(uintptr_t) * 2));
-	delete *horionToInjectorPtr;
-	delete *injectorToHorionPtr;
+	delete* horionToInjectorPtr;
+	delete* injectorToHorionPtr;
 	delete[] magicArray;
 
 	ExitThread(0);
@@ -305,7 +302,7 @@ DWORD WINAPI startMod(LPVOID lpParam) {
 	gameModule = mem.GetModule(L"Minecraft.Windows.exe"); // Get Module for Base Address
 
 	MH_Initialize();
-	GameData::initGameData(gameModule, &mem, (HMODULE) lpParam);
+	GameData::initGameData(gameModule, &mem, (HMODULE)lpParam);
 	Target::init(g_Data.getPtrLocalPlayer());
 
 	TabGui::init();
@@ -327,8 +324,8 @@ DWORD WINAPI startMod(LPVOID lpParam) {
 	configMgr->init();
 
 	logF("Starting threads...");
-	
-	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE) analyticsThread, lpParam, NULL, NULL);
+
+	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)analyticsThread, lpParam, NULL, NULL);
 
 	ExitThread(0);
 }
@@ -344,18 +341,18 @@ DllMain(HMODULE hModule,
 		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)startMod, hModule, NULL, NULL);
 		DisableThreadLibraryCalls(hModule);
 	}
-	break;
+						   break;
 	case DLL_PROCESS_DETACH:
 		isRunning = false;
-		
+
 		configMgr->saveConfig();
 		moduleMgr->disable();
 		cmdMgr->disable();
 		Hooks::Restore();
-		
+
 		logF("Removing logger");
 		Logger::Disable();
-		
+
 		MH_Uninitialize();
 		delete moduleMgr;
 		delete cmdMgr;

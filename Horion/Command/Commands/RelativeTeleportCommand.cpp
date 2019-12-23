@@ -1,13 +1,10 @@
 #include "RelativeTeleportCommand.h"
 
-
-
 RelativeTeleportCommand::RelativeTeleportCommand() : IMCCommand("relativeteleport", "Teleports to coordinates relative to the player.", "<X> <Y> <Z>") {
 	registerAlias("reltp");
 	registerAlias("rtp");
 	registerAlias("vclip");
 }
-
 
 RelativeTeleportCommand::~RelativeTeleportCommand() {
 }

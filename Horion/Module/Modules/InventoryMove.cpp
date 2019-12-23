@@ -1,10 +1,7 @@
 #include "InventoryMove.h"
 
-
-
 InventoryMove::InventoryMove() : IModule(0x0, Category::MOVEMENT, "Move even though you have your inventory open") {
 }
-
 
 InventoryMove::~InventoryMove() {
 }
@@ -24,7 +21,6 @@ void InventoryMove::onTick(C_GameMode* gm) {
 	float speed = 0.325f;
 	float yaw = gm->player->yaw;
 
-
 	if (GameData::isKeyDown(*input->spaceBarKey) && gm->player->onGround)
 		gm->player->jumpFromGround();
 
@@ -34,7 +30,7 @@ void InventoryMove::onTick(C_GameMode* gm) {
 		yaw += 45.f;
 		keyPressed = true;
 	}
-	else if (GameData::isKeyDown(*input->forwardKey) && GameData::isKeyDown(*input->leftKey) &&!GameData::isKeyDown(*input->rightKey)) {
+	else if (GameData::isKeyDown(*input->forwardKey) && GameData::isKeyDown(*input->leftKey) && !GameData::isKeyDown(*input->rightKey)) {
 		yaw -= 45.f;
 		keyPressed = true;
 	}
@@ -64,8 +60,8 @@ void InventoryMove::onTick(C_GameMode* gm) {
 	if (yaw >= 180)
 		yaw -= 360.f;
 
-	float calcYaw = (yaw + 90) *  (PI / 180);
-	float calcPitch = (gm->player->pitch)  * -(PI / 180);
+	float calcYaw = (yaw + 90) * (PI / 180);
+	float calcPitch = (gm->player->pitch) * -(PI / 180);
 	vec3_t moveVec;
 	moveVec.x = cos(calcYaw) * cos(calcPitch) * speed;
 	moveVec.y = gm->player->velocity.y;

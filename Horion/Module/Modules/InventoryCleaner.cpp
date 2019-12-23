@@ -10,7 +10,6 @@ InventoryCleaner::InventoryCleaner() : IModule(0x0, Category::PLAYER, "Automatic
 	//registerBoolSetting("AutoSort", &this->autoSort, this->autoSort);
 }
 
-
 InventoryCleaner::~InventoryCleaner() {
 }
 
@@ -22,12 +21,11 @@ void InventoryCleaner::onTick(C_GameMode* gm) {
 	if (g_Data.getLocalPlayer() == nullptr) return;
 	if ((g_Data.getLocalPlayer()->canOpenContainerScreen() || moduleMgr->getModule<ChestStealer>()->chestScreenController != nullptr) && openInv) return;
 
-
 	// Drop useless items
 	std::vector<int> dropSlots = findUselessItems();
 	if (!dropSlots.empty()) {
 		for (int i : dropSlots) {
-			g_Data.getLocalPlayer()->getSupplies()->inventory->dropSlot(i); 
+			g_Data.getLocalPlayer()->getSupplies()->inventory->dropSlot(i);
 		}
 	}
 
@@ -100,8 +98,6 @@ std::vector<int> InventoryCleaner::findUselessItems() {
 
 	std::vector<int> uselessItems;
 	std::vector<C_ItemStack*> items; {
-
-
 		for (int i = 0; i < 36; i++) {
 			C_ItemStack* itemStack = g_Data.getLocalPlayer()->getSupplies()->inventory->getItemStack(i);
 			if (itemStack->item != nullptr) {
@@ -110,24 +106,24 @@ std::vector<int> InventoryCleaner::findUselessItems() {
 						uselessItems.push_back(i);
 					else
 						items.push_back(itemStack);
-				}else if (std::find(items.begin(), items.end(), itemStack) == items.end())
+				}
+				else if (std::find(items.begin(), items.end(), itemStack) == items.end())
 					items.push_back(itemStack);
 			}
 		}
-		
+
 		for (int i = 0; i < 4; i++) {
 			if (g_Data.getLocalPlayer()->getArmor(i)->item != nullptr)
 				items.push_back(g_Data.getLocalPlayer()->getArmor(i));
 		}
-		
 	}
 	// Filter weapons
-	if(items.size() > 0) {
+	if (items.size() > 0) {
 		// Filter by attack damage
 		std::sort(items.begin(), items.end(), [](const C_ItemStack* lhs, const C_ItemStack* rhs) {
-				C_ItemStack* current = const_cast<C_ItemStack*>(lhs);
-				C_ItemStack* other = const_cast<C_ItemStack*>(rhs);
-				return current->getAttackingDamageWithEnchants() > other->getAttackingDamageWithEnchants();
+			C_ItemStack* current = const_cast<C_ItemStack*>(lhs);
+			C_ItemStack* other = const_cast<C_ItemStack*>(rhs);
+			return current->getAttackingDamageWithEnchants() > other->getAttackingDamageWithEnchants();
 		});
 
 		bool hadTheBestItem = false;
@@ -139,7 +135,8 @@ std::vector<int> InventoryCleaner::findUselessItems() {
 			if (itemStack->item != nullptr && itemStack->getAttackingDamageWithEnchants() > 1) {
 				if (itemStack->getAttackingDamageWithEnchants() < bestItem->getAttackingDamageWithEnchants()) {
 					uselessItems.push_back(i);
-				} else {
+				}
+				else {
 					// Damage same as bestItem
 					if (hadTheBestItem)
 						uselessItems.push_back(i);
@@ -162,7 +159,7 @@ std::vector<int> InventoryCleaner::findUselessItems() {
 			C_ItemStack* other = const_cast<C_ItemStack*>(rhs);
 			return current->getArmorValueWithEnchants() > other->getArmorValueWithEnchants();
 		});
-		
+
 		// Put armor items in their respective vectors
 		for (C_ItemStack* itemsteck : items) {
 			C_Item* item = itemsteck->getItem();
@@ -183,7 +180,7 @@ std::vector<int> InventoryCleaner::findUselessItems() {
 				float testArmorValue = 0;
 				switch (armor->ArmorSlot) {
 				case 0:
-					if(helmets.size() > 0)
+					if (helmets.size() > 0)
 						testArmorValue = helmets.at(0)->getArmorValueWithEnchants();
 					break;
 				case 1:
@@ -212,7 +209,8 @@ std::vector<int> InventoryCleaner::findUselessItems() {
 				if (armor->isHelmet()) {
 					if (hadBest[0] || itemStack->getArmorValueWithEnchants() < helmets.at(0)->getArmorValueWithEnchants()) {
 						uselessItems.push_back(i);
-					}else 
+					}
+					else
 						hadBest[0] = true;
 				}
 				else if (armor->isChestplate()) {

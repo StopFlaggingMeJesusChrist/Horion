@@ -1,6 +1,6 @@
 #include "ModuleManager.h"
 
-ModuleManager::ModuleManager(GameData * gameData)
+ModuleManager::ModuleManager(GameData* gameData)
 {
 	this->gameData = gameData;
 }
@@ -107,7 +107,7 @@ void ModuleManager::disable()
 	}
 }
 
-void ModuleManager::onLoadConfig(json * conf)
+void ModuleManager::onLoadConfig(json* conf)
 {
 	if (!isInitialized())
 		return;
@@ -117,7 +117,7 @@ void ModuleManager::onLoadConfig(json * conf)
 	}
 }
 
-void ModuleManager::onSaveConfig(json * conf)
+void ModuleManager::onSaveConfig(json* conf)
 {
 	if (!isInitialized())
 		return;
@@ -127,7 +127,7 @@ void ModuleManager::onSaveConfig(json * conf)
 	}
 }
 
-void ModuleManager::onTick(C_GameMode * gameMode)
+void ModuleManager::onTick(C_GameMode* gameMode)
 {
 	if (!isInitialized())
 		return;

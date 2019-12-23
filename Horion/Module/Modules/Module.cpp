@@ -1,7 +1,5 @@
 #include "Module.h"
 
-
-
 IModule::IModule(int key, Category c, const char* tooltip) {
 	this->keybind = key;
 	this->category = c;
@@ -18,11 +16,11 @@ void IModule::registerFloatSetting(std::string name, float* floatPtr, float defa
 
 	SettingEntry* setting = new SettingEntry();
 	setting->valueType = ValueType::FLOAT_T;
-	
+
 	setting->value = reinterpret_cast<SettingValue*>(floatPtr);
 
 	// Default Value
-	SettingValue* defaultVal = new SettingValue(); 
+	SettingValue* defaultVal = new SettingValue();
 	defaultVal->_float = defaultValue;
 	setting->defaultValue = defaultVal;
 
@@ -41,7 +39,7 @@ void IModule::registerFloatSetting(std::string name, float* floatPtr, float defa
 	settings.push_back(setting); // Add to list
 }
 
-void IModule::registerIntSetting(std::string name, int * intPtr, int defaultValue, int minValue, int maxValue) {
+void IModule::registerIntSetting(std::string name, int* intPtr, int defaultValue, int minValue, int maxValue) {
 #ifdef DEBUG
 	if (minValue > maxValue)
 		__debugbreak(); // Minimum value is bigger than maximum value
@@ -52,7 +50,7 @@ void IModule::registerIntSetting(std::string name, int * intPtr, int defaultValu
 	setting->value = reinterpret_cast<SettingValue*>(intPtr); // Actual Value
 
 	// Default Value
-	SettingValue* defaultVal = new SettingValue(); 
+	SettingValue* defaultVal = new SettingValue();
 	defaultVal->_int = defaultValue;
 	setting->defaultValue = defaultVal;
 
@@ -67,12 +65,12 @@ void IModule::registerIntSetting(std::string name, int * intPtr, int defaultValu
 	setting->maxValue = maxVal;
 
 	// Name
-	strcpy_s(setting->name, 19, name.c_str()); 
+	strcpy_s(setting->name, 19, name.c_str());
 
 	settings.push_back(setting); // Add to list
 }
 
-void IModule::registerBoolSetting(std::string name, bool * boolPtr, bool defaultValue) {
+void IModule::registerBoolSetting(std::string name, bool* boolPtr, bool defaultValue) {
 	SettingEntry* setting = new SettingEntry();
 	setting->valueType = ValueType::BOOL_T;
 
@@ -120,7 +118,6 @@ void IModule::onKeyUpdate(int key, bool isDown) {
 		else if (isDown)
 			toggle();
 	}
-		
 }
 
 void IModule::onEnable() {
@@ -138,7 +135,7 @@ void IModule::onPostRender() {
 void IModule::onSendPacket(C_Packet*) {
 }
 
-void IModule::onLoadConfig(json * conf) {
+void IModule::onLoadConfig(json* conf) {
 	if (conf->contains(this->getRawModuleName())) {
 		auto obj = conf->at(this->getRawModuleName());
 		if (obj.is_null())
@@ -185,11 +182,11 @@ void IModule::onLoadConfig(json * conf) {
 
 #pragma warning( push )
 #pragma warning( disable : 26444 )
-void IModule::onSaveConfig(json * conf) {
+void IModule::onSaveConfig(json* conf) {
 	std::string modName = getRawModuleName();
 	if (conf->contains(modName.c_str()))
 		conf->erase(modName.c_str());
-	
+
 	json obj = {};
 	//auto obj = conf->at(modName);
 	for (auto it = this->settings.begin(); it != this->settings.end(); ++it) {
@@ -215,22 +212,21 @@ void IModule::onSaveConfig(json * conf) {
 			break;
 		}
 	}
-	
+
 	conf->emplace(modName.c_str(), obj);
 }
 
-#pragma warning( pop ) 
+#pragma warning( pop )
 
 bool IModule::isFlashMode() {
 	return false;
 }
 
-
 void IModule::setEnabled(bool enabled) {
 	if (this->enabled != enabled) {
 		this->enabled = enabled;
 #ifndef _DEBUG
-		if(!isFlashMode()) // Only print jetpack stuff in debug mode
+		if (!isFlashMode()) // Only print jetpack stuff in debug mode
 #endif
 			logF("%s %s", enabled ? "Enabled" : "Disabled", this->getModuleName());
 

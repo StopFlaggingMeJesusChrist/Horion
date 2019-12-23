@@ -1,11 +1,9 @@
 #include "Tower.h"
 #include "../../DrawUtils.h"
 
-
 Tower::Tower() : IModule(0x0, Category::BUILD, "Like scaffold, but vertically and a lot faster") {
 	registerFloatSetting("motion", &this->motion, this->motion, 0.3f, 1.f);
 }
-
 
 Tower::~Tower() {
 }
@@ -16,10 +14,10 @@ const char* Tower::getModuleName() {
 
 bool Tower::tryTower(vec3_t blockBelow) {
 	C_GameSettingsInput* input = g_Data.getClientInstance()->getGameSettingsInput();
-	
+
 	if (input == nullptr)
 		return false;
-	
+
 	blockBelow = blockBelow.floor();
 
 	DrawUtils::drawBox(blockBelow, vec3_t(blockBelow).add(1), 0.4f);
@@ -30,7 +28,6 @@ bool Tower::tryTower(vec3_t blockBelow) {
 	C_BlockLegacy* blockLegacy = *(block->blockLegacy);
 	//logF("blockLegacy: %llX", blockLegacy);
 	if (blockLegacy->material->isReplaceable) {
-
 		vec3_ti* blok = new vec3_ti(blockBelow);
 
 		// Find neighbour
@@ -89,7 +86,6 @@ void Tower::onPostRender() {
 	blockBelow.y -= g_Data.getLocalPlayer()->height;
 	blockBelow.y -= 0.5f;
 
-
 	// Adjustment by velocity
 	float speed = g_Data.getLocalPlayer()->velocity.magnitudexy();
 	vec3_t vel = g_Data.getLocalPlayer()->velocity;
@@ -107,6 +103,5 @@ void Tower::onPostRender() {
 				}
 			}
 		}
-
 	}
 }

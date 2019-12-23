@@ -1,10 +1,8 @@
 #include "Reach.h"
 
-
 Reach::Reach() : IModule(0x0, Category::COMBAT, "Increases your reach") {
-	this->registerFloatSetting("Reach Value", &this->reachValue, this->reachValue,3.f,7.f);
+	this->registerFloatSetting("Reach Value", &this->reachValue, this->reachValue, 3.f, 7.f);
 }
-
 
 Reach::~Reach() {
 }
@@ -34,7 +32,6 @@ void Reach::onEnable() {
 		__debugbreak();
 #endif
 	}
-	
 }
 
 void Reach::onDisable() {

@@ -42,7 +42,7 @@ private:
 public:
 	CommandMgr(GameData* gm);
 	~CommandMgr();
-	
+
 	char prefix = '.';
 
 	void initCommands();

@@ -12,7 +12,6 @@
 #include <iosfwd>
 #endif
 
-
 #include <mutex>
 #include <string>
 #include <ctime>
@@ -30,7 +29,7 @@ using namespace ABI::Windows::Storage;
 using namespace Microsoft::WRL;
 using namespace Microsoft::WRL::Wrappers;
 
-#ifndef logF 
+#ifndef logF
 #define logF Logger::WriteLogFileF
 #endif
 

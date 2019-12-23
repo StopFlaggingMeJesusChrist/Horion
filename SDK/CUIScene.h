@@ -3,7 +3,6 @@
 #include "TextHolder.h"
 
 class C_UIScene {
-
 private:
 	virtual ~C_UIScene();
 	// Duplicate destructor
@@ -26,12 +25,12 @@ private:
 	virtual __int64 updateEvents(void);
 	virtual __int64 applyInput(float);
 	virtual __int64 update(double);
-	virtual __int64 preRenderUpdate(__int64 &);
-	virtual __int64 prepareFrame(__int64 &);
-	virtual __int64 render(__int64 &, __int64 const&);
-	virtual __int64 postRenderUpdate(__int64 &);
+	virtual __int64 preRenderUpdate(__int64&);
+	virtual __int64 prepareFrame(__int64&);
+	virtual __int64 render(__int64&, __int64 const&);
+	virtual __int64 postRenderUpdate(__int64&);
 public:
-	virtual void setupAndRender(__int64 &);
+	virtual void setupAndRender(__int64&);
 private:
 	virtual __int64 handleInputModeChanged(__int64);
 	virtual __int64 handleHoloInputModeChanged(__int64);
@@ -83,7 +82,7 @@ public:
 private:
 	virtual __int64 getScreenTelemetryName(void)const;
 	virtual __int64 getScreenNameW(void)const;
-	virtual __int64 addEventProperties(__int64 const &)const;
+	virtual __int64 addEventProperties(__int64 const&)const;
 	virtual __int64 getScreenVersion(void)const;
 	virtual __int64 processBufferedTextCharEvents(__int64 const&);
 	virtual __int64 getShouldSendEvents(void);
@@ -94,7 +93,7 @@ private:
 public:
 	virtual void setWantsTextOnly(bool);
 private:
-	virtual __int64 onDelete(__int64 &, __int64 &);
+	virtual __int64 onDelete(__int64&, __int64&);
 public:
 	virtual bool isGamepadCursorEnabled(void)const;
 private:
@@ -124,7 +123,7 @@ private:
 	virtual __int64 sendScreenEvent(__int64 const&, __int64 const&);
 public:
 	virtual void setDebugFeature(__int64, bool)const;
-	virtual void setupForRendering(__int64 &);
+	virtual void setupForRendering(__int64&);
 private:
-	virtual __int64 cleanupForRendering(__int64 &);
+	virtual __int64 cleanupForRendering(__int64&);
 };

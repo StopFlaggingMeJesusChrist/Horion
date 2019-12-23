@@ -1,11 +1,8 @@
 #include "Glide.h"
 
-
-
 Glide::Glide() : IModule('U', Category::MOVEMENT, "Float down") {
 	this->registerFloatSetting("value", &this->glideMod, this->glideMod, -2, 1);
 }
-
 
 Glide::~Glide() {
 }
@@ -18,7 +15,6 @@ const char* Glide::getModuleName() {
 	}
 	else
 		return ("Glide");
-	
 }
 
 void Glide::onTick(C_GameMode* gm) {
@@ -30,9 +26,8 @@ void Glide::onTick(C_GameMode* gm) {
 			glideModEffective -= 0.2f;
 		gm->player->velocity.y = glideModEffective;
 	}
-		
 }
 
-const char * Glide::getRawModuleName() {
+const char* Glide::getRawModuleName() {
 	return "Glide";
 }

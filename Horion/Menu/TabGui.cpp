@@ -1,6 +1,5 @@
 #include "TabGui.h"
 
-
 // State
 int level;
 int selected[4];
@@ -19,7 +18,7 @@ struct LabelContainer {
 
 std::vector<LabelContainer> labelList;
 
-void TabGui::renderLabel(const char * text, IModule* mod)
+void TabGui::renderLabel(const char* text, IModule* mod)
 {
 	//size_t strlength = strlen(text) + 1;
 	//char* alloc = new char[strlength];
@@ -30,7 +29,7 @@ void TabGui::renderLabel(const char * text, IModule* mod)
 		moduleLabel.enabled = mod->isEnabled();
 		moduleLabel.mod = mod;
 	}
-	
+
 	labelList.push_back(moduleLabel);
 }
 
@@ -41,7 +40,7 @@ void TabGui::renderLevel()
 	static const float textHeight = 10.f * textSize;
 	static constexpr float alphaVal = 0.5f;
 
-	// First loop: Get the maximum text length 
+	// First loop: Get the maximum text length
 	float maxLength = 1;
 	int labelListLength = 0;
 	for (auto it = labelList.begin(); it != labelList.end(); ++it) {
@@ -65,7 +64,7 @@ void TabGui::renderLevel()
 			yOffset,
 			xOffset + maxLength + 4.5f,
 			yOffset + textHeight);
-		
+
 		if (selected[renderedLevel] == i && level >= renderedLevel) { // We are selected
 			if (renderedLevel == level) { // Are we actually in the menu we are drawing right now?
 				// We are selected in the current menu
@@ -123,12 +122,12 @@ void TabGui::renderLevel()
 		else { // We are not selected
 			if (label.enabled && renderedLevel > 0)
 				DrawUtils::fillRectangle(rectPos, MC_Color(0.9f, 0.4f, 0.4f, 1.0f), alphaVal);
-			else if(renderedLevel > 0)
+			else if (renderedLevel > 0)
 				DrawUtils::fillRectangle(rectPos, MC_Color(0.4f, 0.4f, 0.4f, 1.0f), alphaVal);
 			else
 				DrawUtils::fillRectangle(rectPos, MC_Color(0.2f, 0.2f, 0.2f, 1.0f), alphaVal);
 		}
-			
+
 		//DrawUtils::drawRectangle(rectPos, MC_Color(0.0f, 0.0f, 0.0f, 1.0f), 1, 0.3f); // Border around Text
 
 		DrawUtils::drawText(vec2_t(xOffset + 1.5f, yOffset /*+ 0.5f*/), &std::string(label.text), /* White Color*/ nullptr, textSize);
@@ -160,7 +159,7 @@ void TabGui::render()
 	renderLabel("Build");
 	renderLabel("Exploits");
 	renderLevel();
-	
+
 	// Render all modules
 	if (level >= 0) {
 		std::vector<IModule*>* modules = moduleMgr->getModuleList();
@@ -185,11 +184,10 @@ void TabGui::init() {
 void TabGui::onKeyUpdate(int key, bool isDown)
 {
 	if (!isDown) {
-		if(key == VK_RIGHT)
+		if (key == VK_RIGHT)
 			toggleCurrentSelection = false;
 		return;
 	}
-		
 
 	switch (key) {
 	case VK_LEFT: // Leave menus
@@ -219,6 +217,6 @@ void TabGui::onKeyUpdate(int key, bool isDown)
 		break;
 	};
 
-	if(level < 3)
+	if (level < 3)
 		selected[level + 1] = 0;
 }

@@ -1,11 +1,8 @@
 #include "ToggleCommand.h"
 
-
-
 ToggleCommand::ToggleCommand() : IMCCommand("toggle", "Toggles a module", "<module>") {
 	registerAlias("t");
 }
-
 
 ToggleCommand::~ToggleCommand() {
 }
@@ -16,7 +13,6 @@ bool ToggleCommand::execute(std::vector<std::string>* args)
 	std::string moduleName = args->at(1);
 
 	assertTrue(moduleName.size() > 0);
-
 
 	IModule* mod = moduleMgr->getModuleByName(moduleName);
 	if (mod == nullptr) {

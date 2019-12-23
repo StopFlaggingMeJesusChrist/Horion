@@ -120,7 +120,7 @@ private:
 public:
 	int gamemode; //0x1D94
 private:
-	char pad_1DA4[0x198]; //0x1D98 
+	char pad_1DA4[0x198]; //0x1D98
 public:
 	TextHolder uuid; //0x1F30
 
@@ -160,7 +160,7 @@ private:
 	virtual __int64 checkBlockCollisions(AABB const&);
 	virtual __int64 checkBlockCollisions(void);
 	virtual __int64 breaksFallingBlocks(void)const;
-	virtual __int64 blockedByShield(__int64 const&, C_Entity &);
+	virtual __int64 blockedByShield(__int64 const&, C_Entity&);
 	virtual __int64 moveRelative(float, float, float, float);
 	virtual __int64 teleportTo(vec3_t const&, bool, int, int);
 	virtual __int64 tryTeleportTo(vec3_t const&, bool, bool, int, int);
@@ -175,8 +175,8 @@ private:
 	virtual __int64 rideTick(void);
 	virtual __int64 positionRider(C_Entity&, float);
 	virtual __int64 getRidingHeight(void);
-	virtual __int64 startRiding(C_Entity &);
-	virtual __int64 addRider(C_Entity &);
+	virtual __int64 startRiding(C_Entity&);
+	virtual __int64 addRider(C_Entity&);
 	virtual __int64 flagRiderToRemove(C_Entity&);
 	virtual __int64 getExitTip(std::string const&, __int64)const;
 	virtual __int64 intersects(vec3_t const&, vec3_t const&)const;
@@ -225,7 +225,7 @@ public:
 private:
 	virtual __int64 getBrightness(float)const;
 	virtual __int64 interactPreventDefault(void);
-	virtual __int64 playerTouch(C_Player &);
+	virtual __int64 playerTouch(C_Player&);
 	virtual __int64 onAboveBubbleColumn(bool);
 	virtual __int64 onInsideBubbleColumn(bool);
 public:
@@ -246,15 +246,15 @@ public:
 	virtual bool isSurfaceMob(void)const;
 	virtual bool isTargetable(void)const;
 	virtual bool canAttack(C_Entity*, bool)const;
-	virtual void setTarget(C_Entity *);
+	virtual void setTarget(C_Entity*);
 private:
 	virtual __int64 findAttackTarget(void);
 public:
 	virtual bool isValidTarget(C_Entity*)const;
 private:
-	virtual __int64 attack(C_Entity &);
+	virtual __int64 attack(C_Entity&);
 	virtual void performRangedAttack(C_Entity&, float);
-	virtual __int64 adjustDamageAmount(int &)const;
+	virtual __int64 adjustDamageAmount(int&)const;
 	virtual __int64 getEquipmentCount(void)const;
 public:
 	virtual void setOwner(__int64);
@@ -293,9 +293,9 @@ private:
 	virtual __int64 spawnAtLocation(__int64 const&, float);
 	virtual __int64 despawn(void);
 	virtual __int64 killed(C_Entity&);
-	virtual __int64 awardKillScore(C_Entity &, int);
+	virtual __int64 awardKillScore(C_Entity&, int);
 public:
-	virtual void setArmor(int,C_ItemStack const&);
+	virtual void setArmor(int, C_ItemStack const&);
 	virtual C_ItemStack* getArmor(int)const;
 private:
 	virtual __int64 getArmorMaterialTypeInSlot(__int64)const;
@@ -312,9 +312,9 @@ public:
 	virtual C_ItemStack* getEquippedTotem(void)const;
 	virtual __int64 consumeTotem(void);
 private:
-	virtual __int64 save(__int64 &);
-	virtual __int64 saveWithoutId(__int64 &);
-	virtual __int64 load(__int64 const&, __int64 &);
+	virtual __int64 save(__int64&);
+	virtual __int64 saveWithoutId(__int64&);
+	virtual __int64 load(__int64 const&, __int64&);
 	virtual __int64 loadLinks(__int64 const&, __int64);
 public:
 	virtual uint8_t getEntityTypeId(void)const;
@@ -344,7 +344,7 @@ private:
 	virtual __int64 playSynchronizedSound(__int64, vec3_t const&, int, bool);
 	virtual __int64 onSynchedDataUpdate(int);
 public:
-	virtual bool canAddRider(C_Entity &)const;
+	virtual bool canAddRider(C_Entity&)const;
 	virtual bool canBePulledIntoVehicle(void)const;
 private:
 	virtual __int64 inCaravan(void)const;
@@ -359,7 +359,7 @@ private:
 	virtual __int64 stopRiding(bool, bool, bool);
 	virtual __int64 startSwimming(void);
 	virtual __int64 stopSwimming(void);
-	virtual __int64 buildDebugInfo(std::string &)const;
+	virtual __int64 buildDebugInfo(std::string&)const;
 	virtual __int64 getCommandPermissionLevel(void)const;
 	virtual __int64 getMutableAttribute(__int64 const&);
 public:
@@ -371,20 +371,20 @@ public:
 	virtual bool canBeAffected(__int64 const&)const;
 	virtual bool canBeAffectedByArrow(__int64 const&)const;
 private:
-	virtual __int64 onEffectAdded(__int64 &);
+	virtual __int64 onEffectAdded(__int64&);
 	virtual __int64 onEffectUpdated(__int64 const&);
-	virtual __int64 onEffectRemoved(__int64 &);
+	virtual __int64 onEffectRemoved(__int64&);
 	virtual __int64 getAnimationComponent(void);
-	virtual __int64 openContainerComponent(C_Player &);
+	virtual __int64 openContainerComponent(C_Player&);
 public:
 	virtual __int64 swing(void);
 private:
-	virtual __int64 useItem(__int64 &, __int64, bool);
+	virtual __int64 useItem(__int64&, __int64, bool);
 public:
 	virtual bool hasOutputSignal(unsigned char)const;
 private:
 	virtual __int64 getOutputSignal(void)const;
-	virtual __int64 getDebugText(__int64 &);
+	virtual __int64 getDebugText(__int64&);
 	virtual __int64 getMapDecorationRotation(void)const;
 	virtual __int64 getRiderYRotation(C_Entity const&)const;
 	virtual __int64 getYHeadRot(void)const;
@@ -393,9 +393,9 @@ public:
 	virtual bool isCreative(void)const;
 	virtual bool isAdventure(void)const;
 private:
-	virtual __int64 add(__int64 &);
+	virtual __int64 add(__int64&);
 	virtual __int64 drop(__int64 const&, bool);
-	virtual __int64 getInteraction(C_Player &, __int64 &, vec3_t const&);
+	virtual __int64 getInteraction(C_Player&, __int64&, vec3_t const&);
 public:
 	virtual bool canDestroyBlock(__int64 const&)const;
 	virtual void setAuxValue(int);
@@ -417,15 +417,15 @@ private:
 	virtual __int64 kill(void);
 	virtual __int64 die(__int64 const&);
 	virtual __int64 shouldTick(void)const;
-	virtual __int64 updateEntitySpecificMolangVariables(__int64 &);
+	virtual __int64 updateEntitySpecificMolangVariables(__int64&);
 public:
 	virtual bool canMakeStepSound(void)const;
 private:
 	virtual __int64 outOfWorld(void);
 	virtual __int64 _hurt(__int64 const&, int, bool, bool);
 	virtual __int64 markHurt(void);
-	virtual __int64 readAdditionalSaveData(__int64 const&, __int64 &);
-	virtual __int64 addAdditionalSaveData(__int64 &);
+	virtual __int64 readAdditionalSaveData(__int64 const&, __int64&);
+	virtual __int64 addAdditionalSaveData(__int64&);
 	virtual __int64 _playStepSound(vec3_ti const&, __int64 const&);
 	virtual __int64 _playFlySound(vec3_ti const&, __int64 const&);
 	virtual __int64 _makeFlySound(void)const;
@@ -442,7 +442,7 @@ private:
 	virtual __int64 _removeRider(__int64 const&, bool, bool);
 	virtual __int64 onSizeUpdated(void);
 	virtual __int64 _doAutoAttackOnTouch(C_Entity&);
-	virtual __int64 knockback(C_Entity *, int, float, float, float, float, float);
+	virtual __int64 knockback(C_Entity*, int, float, float, float, float, float);
 	virtual __int64 resolveDeathLoot(int, __int64 const&);
 	virtual __int64 spawnAnim(void);
 public:
@@ -467,7 +467,7 @@ private:
 	virtual __int64 updateWalkAnim(void);
 	virtual __int64 aiStep(void);
 	virtual __int64 pushEntities(void);
-	virtual __int64 lookAt(C_Entity *, float, float);
+	virtual __int64 lookAt(C_Entity*, float, float);
 public:
 	virtual bool isLookingAtAnEntity(void);
 private:
@@ -488,14 +488,14 @@ public:
 private:
 	virtual __int64 getLastHurtByPlayer(void);
 public:
-	virtual void setLastHurtByPlayer(C_Player *);
+	virtual void setLastHurtByPlayer(C_Player*);
 private:
 	virtual __int64 getLastHurtMob(void);
 public:
-	virtual void setLastHurtMob(C_Entity *);
-	virtual bool isAlliedTo(C_Entity *);
+	virtual void setLastHurtMob(C_Entity*);
+	virtual bool isAlliedTo(C_Entity*);
 private:
-	virtual __int64 doHurtTarget(C_Entity *);
+	virtual __int64 doHurtTarget(C_Entity*);
 public:
 	virtual bool canBeControlledByRider(void);
 private:
@@ -520,13 +520,13 @@ private:
 	virtual __int64 sendArmor(void);
 	virtual __int64 getDamageAfterMagicAbsorb(__int64 const&, int);
 	virtual __int64 createAIGoals(void);
-	virtual __int64 onBorn(C_Entity &, C_Entity &);
+	virtual __int64 onBorn(C_Entity&, C_Entity&);
 	virtual void setItemSlot(__int64, __int64 const&);
 	virtual __int64 goDownInWater(void);
 public:
 	virtual void setTransitioningSitting(bool);
 private:
-	virtual __int64 attackAnimation(C_Entity *, float);
+	virtual __int64 attackAnimation(C_Entity*, float);
 	virtual __int64 getAttackTime(void);
 	virtual __int64 _getWalkTargetValue(vec3_ti const&);
 public:
@@ -553,7 +553,7 @@ private:
 	virtual __int64 _endJump(void);
 	virtual __int64 updateGliding(void);
 	virtual __int64 _allowAscendingScaffolding(void)const;
-	virtual __int64 prepareRegion(__int64 &);
+	virtual __int64 prepareRegion(__int64&);
 	virtual __int64 destroyRegion(void);
 	virtual __int64 suspendRegion(void);
 	virtual __int64 _fireWillChangeDimension(void);
@@ -708,7 +708,6 @@ private:
 class C_ServerPlayer : public C_Player {
 public:
 	void sendInventory() {
-		
 		//Utils::CallVFunc<315, void>(this);
 	}
 };

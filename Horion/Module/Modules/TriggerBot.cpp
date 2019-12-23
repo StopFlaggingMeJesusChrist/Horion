@@ -1,12 +1,9 @@
 #include "TriggerBot.h"
 #include "../../../Utils/Target.h"
 
-
-
 TriggerBot::TriggerBot() : IModule('K', Category::COMBAT, "Attacks entities you're looking at") {
 	this->registerIntSetting("delay", &this->delay, this->delay, 0, 20);
 }
-
 
 TriggerBot::~TriggerBot() {
 }
@@ -28,4 +25,3 @@ void TriggerBot::onTick(C_GameMode* gm) {
 		Odelay = 0;
 	}
 }
-

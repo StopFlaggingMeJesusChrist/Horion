@@ -3,11 +3,9 @@
 FriendList g_friend;
 
 FriendList::FriendList() {
-	
 }
 
 FriendList::~FriendList() {
-
 }
 
 void FriendList::addPlayerToList(std::string Name) {

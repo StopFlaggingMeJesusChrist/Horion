@@ -27,7 +27,7 @@ public:
 		using drop_t = void(__fastcall*)(C_Inventory*, int, char);
 		static drop_t func = reinterpret_cast<drop_t>(Utils::FindSignature("85 D2 0F 88 ?? ?? ?? ?? 55 56 57 41 54 41 55 41 56 41 57 48"));
 		if (func != 0)
-			func(this, slot,0);
+			func(this, slot, 0);
 	}
 
 	// DROPS WHOLE INVENTORY doesnt work tho
@@ -52,15 +52,15 @@ class C_PlayerInventoryProxy {
 private:
 	char pad_0x0000[0x10]; //0x0000
 public:
-	int selectedHotbarSlot; //0x0010 
+	int selectedHotbarSlot; //0x0010
 private:
 	char pad_0x0014[0x8C]; //0x0014
 public:
-	uint8_t holdingItem; //0x00A0 
+	uint8_t holdingItem; //0x00A0
 private:
 	char pad_0x00A1[0x7]; //0x00A1
 public:
-	C_Inventory* inventory; //0x00A8 
+	C_Inventory* inventory; //0x00A8
 };
 
 class C_ContainerScreenController {
@@ -144,9 +144,7 @@ private:
 };
 
 class C_CraftingScreenController : public C_ContainerScreenController {
-
 };
 
 class C_ChestScreenController : public C_ContainerScreenController {
-
 };

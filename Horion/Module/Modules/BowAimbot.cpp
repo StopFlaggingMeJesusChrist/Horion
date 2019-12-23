@@ -6,7 +6,6 @@ std::vector <C_Entity*> targetList;
 BowAimbot::BowAimbot() : IModule('C', Category::COMBAT, "Aimbot, but for bows") {
 }
 
-
 BowAimbot::~BowAimbot() {
 }
 
@@ -14,7 +13,7 @@ const char* BowAimbot::getModuleName() {
 	return ("BowAimbot");
 }
 
-void findTargets(C_Entity* currentEntity,bool isRegularEntitie) {
+void findTargets(C_Entity* currentEntity, bool isRegularEntitie) {
 	if (currentEntity == 0)
 		return;
 
@@ -35,7 +34,6 @@ void findTargets(C_Entity* currentEntity,bool isRegularEntitie) {
 }
 
 void BowAimbot::onPostRender() {
-	
 	C_LocalPlayer* localPlayer = g_Data.getLocalPlayer();
 	if (localPlayer == nullptr)
 		return;
@@ -44,7 +42,7 @@ void BowAimbot::onPostRender() {
 		return;
 
 	vec3_t origin = g_Data.getClientInstance()->levelRenderer->origin;
-	
+
 	targetList.clear();
 
 	g_Data.forEachEntity(findTargets);

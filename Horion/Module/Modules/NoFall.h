@@ -3,7 +3,6 @@
 #include "Module.h"
 #include "../../DrawUtils.h"
 
-
 class NoFall : public IModule
 {
 public:
@@ -14,4 +13,3 @@ public:
 	virtual const char* getModuleName() override;
 	virtual void onSendPacket(C_Packet* packet) override;
 };
-

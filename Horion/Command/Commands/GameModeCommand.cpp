@@ -1,15 +1,11 @@
 #include "GameModeCommand.h"
 
-
-
 GameModeCommand::GameModeCommand() : IMCCommand("gamemode", "Changes the local player's gamemode", "<number>") {
 	registerAlias("gm");
 }
 
-
 GameModeCommand::~GameModeCommand() {
 }
-
 
 bool GameModeCommand::execute(std::vector<std::string>* args) {
 	assertTrue(g_Data.getClientInstance()->getLocalPlayer() != nullptr);
@@ -20,7 +16,7 @@ bool GameModeCommand::execute(std::vector<std::string>* args) {
 		clientMessageF("[%sHorion%s] %sGameMode changed!", GOLD, WHITE, GREEN);
 		return true;
 	}
-	
+
 	clientMessageF("[%sHorion%s] %sInvalid GameMode!", GOLD, WHITE, RED);
 	return true;
 }

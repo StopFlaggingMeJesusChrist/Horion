@@ -3,7 +3,6 @@
 Jesus::Jesus() : IModule(0, Category::MOVEMENT, "Walk over wather, like Jesus") {
 }
 
-
 Jesus::~Jesus() {
 }
 
@@ -13,7 +12,6 @@ const char* Jesus::getModuleName() {
 
 void Jesus::onTick(C_GameMode* gm) {
 	if (gm->player != nullptr) {
-		
 		if (gm->player->isSneaking()) return;
 
 		if (gm->player->hasEnteredWater()) {
@@ -32,6 +30,6 @@ void Jesus::onTick(C_GameMode* gm) {
 				gm->player->velocity.x *= 1.2f;
 				gm->player->velocity.x *= 1.2f;
 			}
-		}	
+		}
 	}
 }

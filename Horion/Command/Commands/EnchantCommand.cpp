@@ -1,6 +1,5 @@
 #include "EnchantCommand.h"
 
-
 EnchantCommand::EnchantCommand() : IMCCommand("enchant", "Enchants items", "<enchantment> [level] <mode: auto / manual : 1/0>") {
 	enchantMap["protection"] = 0;
 	enchantMap["fire_protection"] = 1;
@@ -158,7 +157,6 @@ bool EnchantCommand::execute(std::vector<std::string>* args) {
 	}
 
 	if (isAuto) {
-		
 		if (strcmp(g_Data.getRakNetInstance()->serverIp.getText(), "mco.mineplex.com") == 0)
 			firstAction = new C_InventoryAction(0, item, nullptr, 32766, 100);
 		else

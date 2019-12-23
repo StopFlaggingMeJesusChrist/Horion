@@ -15,7 +15,6 @@ public:
 	virtual const char* getModuleName() override;
 	virtual const char* getRawModuleName() override;
 
-	inline std::vector<C_MovePlayerPacket*>* getMovePlayerPacketHolder(){ return &MovePlayerPacketHolder; };
+	inline std::vector<C_MovePlayerPacket*>* getMovePlayerPacketHolder() { return &MovePlayerPacketHolder; };
 	inline std::vector<PlayerAuthInputPacket*>* getPlayerAuthInputPacketHolder() { return &PlayerAuthInputPacketHolder; };
 };
-

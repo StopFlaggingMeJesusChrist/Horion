@@ -10,4 +10,3 @@ public:
 	// Inherited via IModule
 	virtual const char* getModuleName() override;
 };
-

@@ -16,8 +16,6 @@ public:
 	inline int& getDelay() { return delay; };
 	inline bool& getBypass() { return bypass; };
 
-	
-
 	// Inherited via IModule
 	virtual const char* getModuleName() override;
 	virtual void onTick(C_GameMode* gm) override;

@@ -10,4 +10,3 @@ public:
 	virtual const char* getModuleName() override;
 	virtual void onPostRender() override;
 };
-

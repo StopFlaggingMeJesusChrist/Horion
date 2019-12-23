@@ -6,7 +6,6 @@ HelpCommand::HelpCommand() : IMCCommand("help", "Lists all commands", "") {
 	registerAlias("h");
 }
 
-
 HelpCommand::~HelpCommand() {
 }
 

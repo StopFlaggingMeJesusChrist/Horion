@@ -59,7 +59,7 @@ public:
 class C_BlockSource {
 public:
 	C_Block* getBlock(const vec3_ti& block) {
-		using getBlock_t = C_Block*(__fastcall*)(C_BlockSource*, const vec3_ti&);
+		using getBlock_t = C_Block * (__fastcall*)(C_BlockSource*, const vec3_ti&);
 		static getBlock_t getBlock = reinterpret_cast<getBlock_t>(Utils::FindSignature("40 53 48 83 EC ?? 48 8B DA 8B 52 ?? 85 D2"));
 		return getBlock(this, block);
 	};

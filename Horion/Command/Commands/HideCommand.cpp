@@ -1,10 +1,7 @@
 #include "HideCommand.h"
 
-
-
 HideCommand::HideCommand() : IMCCommand("hide", "Hides Horion.", "") {
 }
-
 
 HideCommand::~HideCommand() {
 }

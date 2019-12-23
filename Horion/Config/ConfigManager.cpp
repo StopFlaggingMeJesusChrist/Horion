@@ -1,7 +1,5 @@
 #include "ConfigManager.h"
 
-
-
 std::wstring ConfigManager::GetRoamingFolderPath() {
 	ComPtr<IApplicationDataStatics> appDataStatics;
 	auto hr = RoGetActivationFactory(HStringReference(L"Windows.Storage.ApplicationData").Get(), __uuidof(appDataStatics), &appDataStatics);
@@ -32,7 +30,6 @@ ConfigManager::ConfigManager() {
 	this->roamingFolder = GetRoamingFolderPath();
 }
 
-
 ConfigManager::~ConfigManager() {
 }
 
@@ -51,7 +48,7 @@ void ConfigManager::loadConfig(std::string name, bool create) {
 				currentConfigObj.clear();
 				confFile >> currentConfigObj;
 			}
-			catch (json::parse_error& e) {
+			catch (json::parse_error & e) {
 				logF("Config Load Exception!: %s", e.what());
 			}
 			currentConfigObj["from"] = "Horion";

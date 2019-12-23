@@ -11,4 +11,3 @@ public:
 	virtual const char* getModuleName() override;
 	virtual const char* getRawModuleName() override;
 };
-

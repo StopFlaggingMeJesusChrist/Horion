@@ -5,12 +5,12 @@
 class C_InventoryAction {
 public:
 	C_InventoryAction() = default;
-	C_InventoryAction(int slot, C_ItemStack* sourceItem, C_ItemStack* targetItem, int sourceType = 0,int type = 0) {
+	C_InventoryAction(int slot, C_ItemStack* sourceItem, C_ItemStack* targetItem, int sourceType = 0, int type = 0) {
 		memset(this, 0x0, sizeof(C_InventoryAction));
 		this->slot = slot;
-		if(sourceItem != nullptr)
+		if (sourceItem != nullptr)
 			this->sourceItem = *sourceItem;
-		if(targetItem != nullptr)
+		if (targetItem != nullptr)
 			this->targetItem = *targetItem;
 		this->sourceType = sourceType;
 		this->type = type;
@@ -46,5 +46,3 @@ public:
 			InventoryTransactionManager__addAction(this, action);
 	}
 };
-
-

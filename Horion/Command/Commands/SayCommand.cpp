@@ -14,7 +14,7 @@ bool SayCommand::execute(std::vector<std::string>* args) {
 		if (i > 1)
 			os << " ";
 		os << args->at(i);
-	}	
+	}
 	C_TextPacket* textPacket = new C_TextPacket();
 	textPacket->message.setText(os.str());
 	textPacket->sourceName.setText(g_Data.getLocalPlayer()->getNameTag()->getText());

@@ -1,10 +1,7 @@
 #include "Blink.h"
 
-
-
 Blink::Blink() : IModule('L', Category::EXPLOITS, "Stops you from sending packets and then sends them in a bunch") {
 }
-
 
 Blink::~Blink() {
 	this->getMovePlayerPacketHolder()->clear();
@@ -22,4 +19,3 @@ const char* Blink::getRawModuleName() {
 void Blink::onTick(C_GameMode* gm) {
 	gm->player->fallDistance = 0.f;
 }
-
