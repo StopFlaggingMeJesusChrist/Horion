@@ -1,6 +1,6 @@
 #include "Logger.h"
 
-char logPath[200]; 
+char logPath[200];
 bool initializedLogger = false;
 bool loggerActive = true;
 CRITICAL_SECTION loggerLock;
@@ -31,10 +31,9 @@ std::wstring Logger::GetRoamingFolderPath() {
 	uint32_t pathLength;
 	auto roamingPathCStr = roamingPathHString.GetRawBuffer(&pathLength);
 	return std::wstring(roamingPathCStr, pathLength);
-
 }
 
-void Logger::WriteLogFileF(const char * fmt, ...) {
+void Logger::WriteLogFileF(const char* fmt, ...) {
 	if (!loggerActive)
 		return;
 #ifdef _DEBUG
@@ -54,7 +53,6 @@ void Logger::WriteLogFileF(const char * fmt, ...) {
 		}
 		catch (std::exception e) {
 		}
-
 	}
 	else EnterCriticalSection(&loggerLock);
 
@@ -109,7 +107,6 @@ void Logger::WriteBigLogFileF(size_t maxSize, const char* fmt, ...) {
 		}
 		catch (std::exception e) {
 		}
-
 	}
 	else EnterCriticalSection(&loggerLock);
 
@@ -154,7 +151,6 @@ CRITICAL_SECTION* Logger::GetTextToPrintSection() {
 }
 
 void Logger::Disable() {
-	
 	loggerActive = false;
 #ifdef _DEBUG
 	EnterCriticalSection(&loggerLock);
@@ -166,5 +162,4 @@ void Logger::Disable() {
 	DeleteCriticalSection(&loggerLock);
 	DeleteCriticalSection(&vecLock);
 #endif
-
 }

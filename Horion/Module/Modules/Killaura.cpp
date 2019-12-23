@@ -1,7 +1,5 @@
 #include "Killaura.h"
 
-
-
 Killaura::Killaura() : IModule('P', Category::COMBAT, "Attacks entities around you automatically") {
 	this->registerBoolSetting("MultiAura", &this->isMulti, this->isMulti);
 	this->registerBoolSetting("MobAura", &this->isMobAura, this->isMobAura);
@@ -9,7 +7,6 @@ Killaura::Killaura() : IModule('P', Category::COMBAT, "Attacks entities around y
 	this->registerIntSetting("delay", &this->delay, this->delay, 0, 20);
 	this->registerBoolSetting("AutoWeapon", &this->autoweapon, this->autoweapon);
 }
-
 
 Killaura::~Killaura() {
 }
@@ -20,7 +17,7 @@ const char* Killaura::getModuleName() {
 
 static std::vector <C_Entity*> targetList;
 
-void findEntity(C_Entity* currentEntity,bool isRegularEntitie) {
+void findEntity(C_Entity* currentEntity, bool isRegularEntitie) {
 	static Killaura* killauraMod = static_cast<Killaura*>(moduleMgr->getModule<Killaura>());
 	if (killauraMod == 0)
 		killauraMod = static_cast<Killaura*>(moduleMgr->getModule<Killaura>());
@@ -45,14 +42,13 @@ void findEntity(C_Entity* currentEntity,bool isRegularEntitie) {
 			if (!Target::isValidTarget(currentEntity))
 				return;
 		}
-		
+
 		float dist = (*currentEntity->getPos()).dist(*g_Data.getLocalPlayer()->getPos());
 
 		if (dist < killauraMod->range) {
 			targetList.push_back(currentEntity);
 		}
 	}
-	
 }
 
 void Killaura::findWeapon() {
@@ -90,7 +86,7 @@ void Killaura::onTick(C_GameMode* gm) {
 
 		g_Data.getLocalPlayer()->swing();
 
-		// Attack all entitys in targetList 
+		// Attack all entitys in targetList
 		if (isMulti) {
 			for (int i = 0; i < targetList.size(); i++) {
 				angle = g_Data.getClientInstance()->levelRenderer->origin.CalcAngle(*targetList[i]->getPos());
@@ -106,7 +102,7 @@ void Killaura::onTick(C_GameMode* gm) {
 }
 
 void Killaura::onEnable() {
-	if (g_Data.getLocalPlayer() == nullptr) 
+	if (g_Data.getLocalPlayer() == nullptr)
 		this->setEnabled(false);
 }
 
@@ -121,4 +117,3 @@ void Killaura::onSendPacket(C_Packet* packet) {
 		}
 	}
 }
-

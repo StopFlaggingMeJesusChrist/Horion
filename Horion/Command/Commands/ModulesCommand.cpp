@@ -5,7 +5,6 @@ ModulesCommand::ModulesCommand() : IMCCommand("modules", "Lists all modules", ""
 	registerAlias("mods");
 }
 
-
 ModulesCommand::~ModulesCommand() {
 }
 

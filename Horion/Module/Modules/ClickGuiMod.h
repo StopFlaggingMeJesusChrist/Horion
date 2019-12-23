@@ -17,4 +17,3 @@ public:
 	virtual void onEnable() override;
 	virtual bool allowAutoStart() override;
 };
-

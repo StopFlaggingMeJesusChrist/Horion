@@ -14,4 +14,3 @@ public:
 	static void render();
 	static void onKeyUpdate(int key, bool isDown);
 };
-

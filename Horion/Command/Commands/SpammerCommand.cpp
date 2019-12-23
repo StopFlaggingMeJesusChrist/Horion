@@ -1,6 +1,5 @@
 #include "SpammerCommand.h"
 
-
 SpammerCommand::SpammerCommand() : IMCCommand("spammer", "Edit spammer delay/text", "<message/delay/bypass/manual> <string/int/bool>") {
 	registerAlias("spam");
 }
@@ -21,7 +20,7 @@ bool SpammerCommand::execute(std::vector<std::string>* args) {
 		}
 		std::string text = os.str().substr(1);
 		moduleMgr->getModule<Spammer>()->getMessage() = text;
-		clientMessageF("%sSpammer message set to %s%s%s!", GREEN, GRAY, text.c_str(),GREEN);
+		clientMessageF("%sSpammer message set to %s%s%s!", GREEN, GRAY, text.c_str(), GREEN);
 		return true;
 	}
 	else if (option == "delay") {

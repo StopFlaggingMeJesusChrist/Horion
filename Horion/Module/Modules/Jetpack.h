@@ -1,7 +1,6 @@
 #pragma once
 #include "Module.h"
 
-
 class Jetpack :
 	public IModule
 {
@@ -20,4 +19,3 @@ public:
 	// Inherited via IModule
 	virtual const char* getModuleName() override;
 };
-

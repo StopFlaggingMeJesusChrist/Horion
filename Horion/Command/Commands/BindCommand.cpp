@@ -1,18 +1,15 @@
 #include "BindCommand.h"
 
-
-
 BindCommand::BindCommand() : IMCCommand("bind", "Binds modules to specific keys", "<module> <key>") {
 	registerAlias("b");
 }
-
 
 BindCommand::~BindCommand() {
 }
 
 bool BindCommand::execute(std::vector<std::string>* args) {
 	assertTrue(args->size() >= 3);
-	std::string moduleName = args->at(1); 
+	std::string moduleName = args->at(1);
 	std::string key = args->at(2);
 
 	assertTrue(moduleName.size() > 0);
@@ -30,14 +27,14 @@ bool BindCommand::execute(std::vector<std::string>* args) {
 			return true;
 		}
 
-		for(int i = 0; i < 190; i++) {
+		for (int i = 0; i < 190; i++) {
 			const char* haystack = KeyNames[i];
 			size_t len = strlen(needle) + 1;
 			char* haystackLowercase = new char[len];
 			for (int i = 0; i < len; i++)
 				haystackLowercase[i] = tolower(haystack[i]);
 
-			if(strcmp(needle, haystackLowercase) == 0) {
+			if (strcmp(needle, haystackLowercase) == 0) {
 				if (mod == nullptr) {
 					clientMessageF("%sCould not find module with name: %s", RED, moduleName.c_str());
 				}
@@ -54,7 +51,7 @@ bool BindCommand::execute(std::vector<std::string>* args) {
 		return true;
 	}
 
-	int keyCode = (int) key.at(0);
+	int keyCode = (int)key.at(0);
 	if (keyCode >= 0x61 && keyCode <= 0x7A) // Convert key to lower case
 		keyCode -= 0x20;
 

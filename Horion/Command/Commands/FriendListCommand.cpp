@@ -1,15 +1,11 @@
 #include "FriendListCommand.h"
 
-
-
 FriendListCommand::FriendListCommand() : IMCCommand("friend", "Add/Remove friendly players", "<add/remove>") {
 	registerAlias("friendlist");
 }
 
-
 FriendListCommand::~FriendListCommand() {
 }
-
 
 bool FriendListCommand::execute(std::vector<std::string>* args) {
 	assertTrue(args->size() >= 3);
@@ -46,9 +42,8 @@ bool FriendListCommand::execute(std::vector<std::string>* args) {
 
 		playerName = currentEntity->getNameTag()->getText();
 		break;
-
 	}
-	if (playerName.size() <= 1)  {
+	if (playerName.size() <= 1) {
 		clientMessageF("[%sHorion%s] %sCouldn't find player: %s!", GOLD, WHITE, RED, searchedName.c_str());
 		return true;
 	}
@@ -57,7 +52,6 @@ bool FriendListCommand::execute(std::vector<std::string>* args) {
 		FriendList::addPlayerToList(playerName);
 		clientMessageF("[%sHorion%s] %s%s is now your friend!", GOLD, WHITE, GREEN, playerName.c_str());
 		return true;
-
 	}
 	else if (subcommand == "remove") {
 		if (FriendList::removePlayer(searchedName)) {
@@ -71,4 +65,3 @@ bool FriendListCommand::execute(std::vector<std::string>* args) {
 	}
 	return true;
 }
-

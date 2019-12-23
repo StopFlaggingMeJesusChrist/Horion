@@ -9,4 +9,3 @@ NoFriends::~NoFriends() {
 const char* NoFriends::getModuleName() {
 	return ("NoFriends");
 }
-

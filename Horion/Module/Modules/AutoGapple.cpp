@@ -1,6 +1,5 @@
 #include "AutoGapple.h"
 
-
 AutoGapple::AutoGapple() : IModule(0x0, Category::MOVEMENT, "Auto eat gapples if you're low health") {
 	registerIntSetting("health", &this->health, 10, 1, 20);
 }
@@ -13,7 +12,5 @@ const char* AutoGapple::getModuleName() {
 }
 
 void AutoGapple::onTick(C_GameMode* gm) {
-
 	if (gm->player != nullptr) return;
-	
 }

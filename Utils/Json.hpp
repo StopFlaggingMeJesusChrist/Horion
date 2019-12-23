@@ -50,11 +50,9 @@ SOFTWARE.
 
 // #include <nlohmann/adl_serializer.hpp>
 
-
 #include <utility>
 
 // #include <nlohmann/detail/conversions/from_json.hpp>
-
 
 #include <algorithm> // transform
 #include <array> // array
@@ -71,13 +69,11 @@ SOFTWARE.
 
 // #include <nlohmann/detail/exceptions.hpp>
 
-
 #include <exception> // exception
 #include <stdexcept> // runtime_error
 #include <string> // to_string
 
 // #include <nlohmann/detail/input/position_t.hpp>
-
 
 #include <cstddef> // size_t
 
@@ -101,12 +97,10 @@ namespace nlohmann
 				return chars_read_total;
 			}
 		};
-
 	} // namespace detail
 } // namespace nlohmann
 
 // #include <nlohmann/detail/macro_scope.hpp>
-
 
 #include <utility> // pair
 // #include <nlohmann/thirdparty/hedley/hedley.hpp>
@@ -1706,7 +1700,6 @@ JSON_HEDLEY_DIAGNOSTIC_POP
 
 #endif /* !defined(JSON_HEDLEY_VERSION) || (JSON_HEDLEY_VERSION < X) */
 
-
 // This file contains all internal macro definitions
 // You MUST include macro_unscope.hpp at the end of json.hpp to undef all of them
 
@@ -1823,7 +1816,6 @@ JSON_HEDLEY_DIAGNOSTIC_POP
     basic_json<ObjectType, ArrayType, StringType, BooleanType,             \
     NumberIntegerType, NumberUnsignedType, NumberFloatType,                \
     AllocatorType, JSONSerializer>
-
 
 namespace nlohmann
 {
@@ -2177,7 +2169,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/meta/cpp_future.hpp>
 
-
 #include <ciso646> // not
 #include <cstddef> // size_t
 #include <type_traits> // conditional, enable_if, false_type, integral_constant, is_constructible, is_integral, is_same, remove_cv, remove_reference, true_type
@@ -2242,7 +2233,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/meta/type_traits.hpp>
 
-
 #include <ciso646> // not
 #include <limits> // numeric_limits
 #include <type_traits> // false_type, is_constructible, is_integral, is_same, true_type
@@ -2250,11 +2240,9 @@ namespace nlohmann
 
 // #include <nlohmann/detail/iterators/iterator_traits.hpp>
 
-
 #include <iterator> // random_access_iterator_tag
 
 // #include <nlohmann/detail/meta/void_t.hpp>
-
 
 namespace nlohmann
 {
@@ -2269,7 +2257,6 @@ namespace nlohmann
 }  // namespace nlohmann
 
 // #include <nlohmann/detail/meta/cpp_future.hpp>
-
 
 namespace nlohmann
 {
@@ -2322,11 +2309,9 @@ namespace nlohmann
 
 // #include <nlohmann/detail/meta/detected.hpp>
 
-
 #include <type_traits>
 
 // #include <nlohmann/detail/meta/void_t.hpp>
-
 
 // http://en.cppreference.com/w/cpp/experimental/is_detected
 namespace nlohmann
@@ -2447,7 +2432,6 @@ namespace nlohmann
 
 #endif  // INCLUDE_NLOHMANN_JSON_FWD_HPP_
 
-
 namespace nlohmann
 {
 	/*!
@@ -2560,7 +2544,6 @@ namespace nlohmann
 				T>::value;
 		};
 
-
 		///////////////////
 		// is_ functions //
 		///////////////////
@@ -2601,7 +2584,6 @@ namespace nlohmann
 			enable_if_t<is_detected<mapped_type_t, CompatibleObjectType>::value and
 			is_detected<key_type_t, CompatibleObjectType>::value >>
 		{
-
 			using object_t = typename BasicJsonType::object_t;
 
 			// macOS's is_constructible does not play well with nonesuch...
@@ -2812,7 +2794,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/value_t.hpp>
 
-
 #include <array> // array
 #include <ciso646> // and
 #include <cstddef> // size_t
@@ -2888,7 +2869,6 @@ namespace nlohmann
 		}
 	}  // namespace detail
 }  // namespace nlohmann
-
 
 namespace nlohmann
 {
@@ -3261,7 +3241,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/conversions/to_json.hpp>
 
-
 #include <algorithm> // copy
 #include <ciso646> // or, and, not
 #include <iterator> // begin, end
@@ -3274,7 +3253,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/iterators/iteration_proxy.hpp>
 
-
 #include <cstddef> // size_t
 #include <iterator> // input_iterator_tag
 #include <string> // string, to_string
@@ -3283,7 +3261,6 @@ namespace nlohmann
 // #include <nlohmann/detail/meta/type_traits.hpp>
 
 // #include <nlohmann/detail/value_t.hpp>
-
 
 namespace nlohmann
 {
@@ -3457,7 +3434,6 @@ namespace std
 // #include <nlohmann/detail/meta/type_traits.hpp>
 
 // #include <nlohmann/detail/value_t.hpp>
-
 
 namespace nlohmann
 {
@@ -3790,10 +3766,8 @@ namespace nlohmann
 	} // namespace
 } // namespace nlohmann
 
-
 namespace nlohmann
 {
-
 	template<typename, typename>
 	struct adl_serializer
 	{
@@ -3831,7 +3805,6 @@ namespace nlohmann
 			::nlohmann::to_json(j, std::forward<ValueType>(val));
 		}
 	};
-
 }  // namespace nlohmann
 
 // #include <nlohmann/detail/conversions/from_json.hpp>
@@ -3841,7 +3814,6 @@ namespace nlohmann
 // #include <nlohmann/detail/exceptions.hpp>
 
 // #include <nlohmann/detail/input/binary_reader.hpp>
-
 
 #include <algorithm> // generate_n
 #include <array> // array
@@ -3860,7 +3832,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/input/input_adapters.hpp>
 
-
 #include <array> // array
 #include <cassert> // assert
 #include <cstddef> // size_t
@@ -3877,7 +3848,6 @@ namespace nlohmann
 // #include <nlohmann/detail/iterators/iterator_traits.hpp>
 
 // #include <nlohmann/detail/macro_scope.hpp>
-
 
 namespace nlohmann
 {
@@ -3939,7 +3909,6 @@ namespace nlohmann
 			/// the file pointer to read from
 			std::FILE* m_file;
 		};
-
 
 		/*!
 		Input adapter for a (caching) istream. Ignores a UFT Byte Order Mark at
@@ -4306,7 +4275,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/input/json_sax.hpp>
 
-
 #include <cassert> // assert
 #include <cstddef>
 #include <string> // string
@@ -4317,10 +4285,8 @@ namespace nlohmann
 
 // #include <nlohmann/detail/macro_scope.hpp>
 
-
 namespace nlohmann
 {
-
 	/*!
 	@brief SAX interface
 
@@ -4433,7 +4399,6 @@ namespace nlohmann
 
 		virtual ~json_sax() = default;
 	};
-
 
 	namespace detail
 	{
@@ -5006,13 +4971,11 @@ namespace nlohmann
 			}
 		};
 	}  // namespace detail
-
 }  // namespace nlohmann
 
 // #include <nlohmann/detail/macro_scope.hpp>
 
 // #include <nlohmann/detail/meta/is_sax.hpp>
-
 
 #include <cstdint> // size_t
 #include <utility> // declval
@@ -5021,7 +4984,6 @@ namespace nlohmann
 // #include <nlohmann/detail/meta/detected.hpp>
 
 // #include <nlohmann/detail/meta/type_traits.hpp>
-
 
 namespace nlohmann
 {
@@ -5158,7 +5120,6 @@ namespace nlohmann
 }  // namespace nlohmann
 
 // #include <nlohmann/detail/value_t.hpp>
-
 
 namespace nlohmann
 {
@@ -7125,7 +7086,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/input/lexer.hpp>
 
-
 #include <array> // array
 #include <clocale> // localeconv
 #include <cstddef> // size_t
@@ -7141,7 +7101,6 @@ namespace nlohmann
 // #include <nlohmann/detail/input/position_t.hpp>
 
 // #include <nlohmann/detail/macro_scope.hpp>
-
 
 namespace nlohmann
 {
@@ -8641,7 +8600,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/input/parser.hpp>
 
-
 #include <cassert> // assert
 #include <cmath> // isfinite
 #include <cstdint> // uint8_t
@@ -8663,7 +8621,6 @@ namespace nlohmann
 // #include <nlohmann/detail/meta/is_sax.hpp>
 
 // #include <nlohmann/detail/value_t.hpp>
-
 
 namespace nlohmann
 {
@@ -9148,9 +9105,7 @@ namespace nlohmann
 
 // #include <nlohmann/detail/iterators/internal_iterator.hpp>
 
-
 // #include <nlohmann/detail/iterators/primitive_iterator.hpp>
-
 
 #include <cstddef> // ptrdiff_t
 #include <limits>  // numeric_limits
@@ -9271,7 +9226,6 @@ namespace nlohmann
 	}  // namespace detail
 }  // namespace nlohmann
 
-
 namespace nlohmann
 {
 	namespace detail
@@ -9296,7 +9250,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/iterators/iter_impl.hpp>
 
-
 #include <ciso646> // not
 #include <iterator> // iterator, random_access_iterator_tag, bidirectional_iterator_tag, advance, next
 #include <type_traits> // conditional, is_const, remove_const
@@ -9314,7 +9267,6 @@ namespace nlohmann
 // #include <nlohmann/detail/meta/type_traits.hpp>
 
 // #include <nlohmann/detail/value_t.hpp>
-
 
 namespace nlohmann
 {
@@ -9945,7 +9897,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/iterators/json_reverse_iterator.hpp>
 
-
 #include <cstddef> // ptrdiff_t
 #include <iterator> // reverse_iterator
 #include <utility> // declval
@@ -10068,7 +10019,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/json_pointer.hpp>
 
-
 #include <algorithm> // all_of
 #include <cassert> // assert
 #include <cctype> // isdigit
@@ -10082,7 +10032,6 @@ namespace nlohmann
 // #include <nlohmann/detail/macro_scope.hpp>
 
 // #include <nlohmann/detail/value_t.hpp>
-
 
 namespace nlohmann
 {
@@ -11085,12 +11034,10 @@ namespace nlohmann
 
 // #include <nlohmann/detail/json_ref.hpp>
 
-
 #include <initializer_list>
 #include <utility>
 
 // #include <nlohmann/detail/meta/type_traits.hpp>
-
 
 namespace nlohmann
 {
@@ -11163,7 +11110,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/output/binary_writer.hpp>
 
-
 #include <algorithm> // reverse
 #include <array> // array
 #include <cstdint> // uint8_t, uint16_t, uint32_t, uint64_t
@@ -11177,7 +11123,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/output/output_adapters.hpp>
 
-
 #include <algorithm> // copy
 #include <cstddef> // size_t
 #include <ios> // streamsize
@@ -11187,7 +11132,6 @@ namespace nlohmann
 #include <string> // basic_string
 #include <vector> // vector
 // #include <nlohmann/detail/macro_scope.hpp>
-
 
 namespace nlohmann
 {
@@ -11300,7 +11244,6 @@ namespace nlohmann
 		};
 	}  // namespace detail
 }  // namespace nlohmann
-
 
 namespace nlohmann
 {
@@ -12629,7 +12572,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/output/serializer.hpp>
 
-
 #include <algorithm> // reverse, remove, fill, find, none_of
 #include <array> // array
 #include <cassert> // assert
@@ -12646,7 +12588,6 @@ namespace nlohmann
 
 // #include <nlohmann/detail/conversions/to_chars.hpp>
 
-
 #include <array> // array
 #include <cassert> // assert
 #include <ciso646> // or, and, not
@@ -12657,12 +12598,10 @@ namespace nlohmann
 #include <type_traits> // conditional
 // #include <nlohmann/detail/macro_scope.hpp>
 
-
 namespace nlohmann
 {
 	namespace detail
 	{
-
 		/*!
 		@brief implements the Grisu2 algorithm for binary to decimal floating-point
 		conversion.
@@ -12684,7 +12623,6 @@ namespace nlohmann
 		*/
 		namespace dtoa_impl
 		{
-
 			template <typename Target, typename Source>
 			Target reinterpret_bits(const Source source)
 			{
@@ -13689,7 +13627,6 @@ namespace nlohmann
 				*buf++ = 'e';
 				return append_exponent(buf, n - 1);
 			}
-
 		} // namespace dtoa_impl
 
 		/*!
@@ -13749,7 +13686,6 @@ namespace nlohmann
 
 			return dtoa_impl::format_buffer(first, len, decimal_exponent, kMinExp, kMaxExp);
 		}
-
 	} // namespace detail
 } // namespace nlohmann
 
@@ -13764,7 +13700,6 @@ namespace nlohmann
 // #include <nlohmann/detail/output/output_adapters.hpp>
 
 // #include <nlohmann/detail/value_t.hpp>
-
 
 namespace nlohmann
 {
@@ -14613,7 +14548,6 @@ namespace nlohmann
 
 // #include <nlohmann/json_fwd.hpp>
 
-
 /*!
 @brief namespace for Niels Lohmann
 @see https://github.com/nlohmann
@@ -14621,7 +14555,6 @@ namespace nlohmann
 */
 namespace nlohmann
 {
-
 	/*!
 	@brief a class to store JSON values
 
@@ -14768,7 +14701,6 @@ namespace nlohmann
 		/// @name exceptions
 		/// Classes to implement user-defined exceptions.
 		/// @{
-
 		/// @copydoc detail::exception
 		using exception = detail::exception;
 		/// @copydoc detail::parse_error
@@ -14784,7 +14716,6 @@ namespace nlohmann
 
 		/// @}
 
-
 		/////////////////////
 		// container types //
 		/////////////////////
@@ -14793,7 +14724,6 @@ namespace nlohmann
 		/// The canonic container types to use @ref basic_json like any other STL
 		/// container.
 		/// @{
-
 		/// the type of elements in a basic_json container
 		using value_type = basic_json;
 
@@ -14825,7 +14755,6 @@ namespace nlohmann
 		using const_reverse_iterator = json_reverse_iterator<typename basic_json::const_iterator>;
 
 		/// @}
-
 
 		/*!
 		@brief returns the allocator associated with the container
@@ -14917,7 +14846,6 @@ namespace nlohmann
 			return result;
 		}
 
-
 		///////////////////////////
 		// JSON value data types //
 		///////////////////////////
@@ -14926,7 +14854,6 @@ namespace nlohmann
 		/// The data types to store a JSON value. These types are derived from
 		/// the template arguments passed to class @ref basic_json.
 		/// @{
-
 #if defined(JSON_HAS_CPP_14)
 	// Use transparent comparator if possible, combined with perfect forwarding
 	// on find() and count() calls prevents unnecessary string construction.
@@ -15718,7 +15645,6 @@ namespace nlohmann
 		/// Constructors of class @ref basic_json, copy/move constructor, copy
 		/// assignment, static functions creating objects, and the destructor.
 		/// @{
-
 		/*!
 		@brief create an empty value with a given type
 
@@ -16310,7 +16236,6 @@ namespace nlohmann
 			assert_invariant();
 		}
 
-
 		///////////////////////////////////////
 		// other constructors and destructor //
 		///////////////////////////////////////
@@ -16466,9 +16391,9 @@ namespace nlohmann
 		@since version 1.0.0
 		*/
 		basic_json& operator=(basic_json other) noexcept (
-			std::is_nothrow_move_constructible<value_t>::value and
-			std::is_nothrow_move_assignable<value_t>::value and
-			std::is_nothrow_move_constructible<json_value>::value and
+			std::is_nothrow_move_constructible<value_t>::valueand
+			std::is_nothrow_move_assignable<value_t>::valueand
+			std::is_nothrow_move_constructible<json_value>::valueand
 			std::is_nothrow_move_assignable<json_value>::value
 			)
 		{
@@ -16514,7 +16439,6 @@ namespace nlohmann
 		/// @name object inspection
 		/// Functions to inspect the type of a JSON value.
 		/// @{
-
 		/*!
 		@brief serialization
 
@@ -17079,7 +17003,6 @@ namespace nlohmann
 		/// @name value access
 		/// Direct access to the stored value of a JSON value.
 		/// @{
-
 		/*!
 		@brief get special-case overload
 
@@ -17287,7 +17210,6 @@ namespace nlohmann
 			return v;
 		}
 
-
 		/*!
 		@brief get a pointer value (implicit)
 
@@ -17480,7 +17402,6 @@ namespace nlohmann
 
 		/// @}
 
-
 		////////////////////
 		// element access //
 		////////////////////
@@ -17488,7 +17409,6 @@ namespace nlohmann
 		/// @name element access
 		/// Access to the JSON value.
 		/// @{
-
 		/*!
 		@brief access specified array element with bounds checking
 
@@ -18483,14 +18403,12 @@ namespace nlohmann
 
 		/// @}
 
-
 		////////////
 		// lookup //
 		////////////
 
 		/// @name lookup
 		/// @{
-
 		/*!
 		@brief find an element in a JSON object
 
@@ -18638,14 +18556,12 @@ namespace nlohmann
 
 		/// @}
 
-
 		///////////////
 		// iterators //
 		///////////////
 
 		/// @name iterators
 		/// @{
-
 		/*!
 		@brief returns an iterator to the first element
 
@@ -19070,14 +18986,12 @@ namespace nlohmann
 
 		/// @}
 
-
 		//////////////
 		// capacity //
 		//////////////
 
 		/// @name capacity
 		/// @{
-
 		/*!
 		@brief checks whether the container is empty.
 
@@ -19287,14 +19201,12 @@ namespace nlohmann
 
 		/// @}
 
-
 		///////////////
 		// modifiers //
 		///////////////
 
 		/// @name modifiers
 		/// @{
-
 		/*!
 		@brief clears the contents
 
@@ -20051,9 +19963,9 @@ namespace nlohmann
 		@since version 1.0.0
 		*/
 		void swap(reference other) noexcept (
-			std::is_nothrow_move_constructible<value_t>::value and
-			std::is_nothrow_move_assignable<value_t>::value and
-			std::is_nothrow_move_constructible<json_value>::value and
+			std::is_nothrow_move_constructible<value_t>::valueand
+			std::is_nothrow_move_assignable<value_t>::valueand
+			std::is_nothrow_move_constructible<json_value>::valueand
 			std::is_nothrow_move_assignable<json_value>::value
 			)
 		{
@@ -20170,7 +20082,6 @@ namespace nlohmann
 
 		/// @name lexicographical comparison operators
 		/// @{
-
 		/*!
 		@brief comparison: equal
 
@@ -20606,7 +20517,6 @@ namespace nlohmann
 
 		/// @name serialization
 		/// @{
-
 		/*!
 		@brief serialize to stream
 
@@ -20669,14 +20579,12 @@ namespace nlohmann
 
 		/// @}
 
-
 		/////////////////////
 		// deserialization //
 		/////////////////////
 
 		/// @name deserialization
 		/// @{
-
 		/*!
 		@brief deserialize from a compatible input
 
@@ -21006,7 +20914,6 @@ namespace nlohmann
 			}
 		}
 
-
 	private:
 		//////////////////////
 		// member variables //
@@ -21024,7 +20931,6 @@ namespace nlohmann
 
 		/// @name binary serialization/deserialization support
 		/// @{
-
 	public:
 		/*!
 		@brief create a CBOR serialization of a given JSON value
@@ -21328,7 +21234,6 @@ namespace nlohmann
 			binary_writer<char>(o).write_ubjson(j, use_size, use_type);
 		}
 
-
 		/*!
 		@brief Serializes the given JSON object `j` to BSON and returns a vector
 			   containing the corresponding BSON-representation.
@@ -21411,7 +21316,6 @@ namespace nlohmann
 		{
 			binary_writer<char>(o).write_bson(j);
 		}
-
 
 		/*!
 		@brief create a JSON value from an input in CBOR format
@@ -21823,8 +21727,6 @@ namespace nlohmann
 			return res ? result : basic_json(value_t::discarded);
 		}
 
-
-
 		/// @}
 
 		//////////////////////////
@@ -21833,7 +21735,6 @@ namespace nlohmann
 
 		/// @name JSON Pointer functions
 		/// @{
-
 		/*!
 		@brief access specified element via JSON Pointer
 
@@ -22058,7 +21959,6 @@ namespace nlohmann
 
 		/// @name JSON Patch functions
 		/// @{
-
 		/*!
 		@brief applies a JSON patch
 
@@ -22534,7 +22434,6 @@ namespace nlohmann
 
 		/// @name JSON Merge Patch functions
 		/// @{
-
 		/*!
 		@brief applies a JSON Merge Patch
 
@@ -22629,7 +22528,6 @@ namespace nlohmann
 // specialization of std::swap, and std::hash
 namespace std
 {
-
 	/// hash value for JSON objects
 	template<>
 	struct hash<nlohmann::json>
@@ -22671,13 +22569,12 @@ namespace std
 	*/
 	template<>
 	inline void swap<nlohmann::json>(nlohmann::json& j1, nlohmann::json& j2) noexcept(
-		is_nothrow_move_constructible<nlohmann::json>::value and
+		is_nothrow_move_constructible<nlohmann::json>::valueand
 		is_nothrow_move_assignable<nlohmann::json>::value
 		)
 	{
 		j1.swap(j2);
 	}
-
 } // namespace std
 
 /*!
@@ -22719,7 +22616,6 @@ inline nlohmann::json::json_pointer operator "" _json_pointer(const char* s, std
 }
 
 // #include <nlohmann/detail/macro_unscope.hpp>
-
 
 // restore GCC/clang diagnostic settings
 #if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
@@ -22868,7 +22764,5 @@ inline nlohmann::json::json_pointer operator "" _json_pointer(const char* s, std
 #undef JSON_HEDLEY_VERSION_ENCODE
 #undef JSON_HEDLEY_WARNING
 #undef JSON_HEDLEY_WARN_UNUSED_RESULT
-
-
 
 #endif  // INCLUDE_NLOHMANN_JSON_HPP_

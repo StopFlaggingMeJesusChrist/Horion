@@ -27,7 +27,7 @@ void CommandMgr::initCommands() {
 	commandList.push_back(new PanicCommand());
 	commandList.push_back(new HideCommand());
 	commandList.push_back(new GiveCommand());
-	commandList.push_back(new BruhCommand()); 
+	commandList.push_back(new BruhCommand());
 	commandList.push_back(new ServerCommand());
 	commandList.push_back(new setoffhandCommand());
 	commandList.push_back(new CoordsCommand());
@@ -42,14 +42,13 @@ void CommandMgr::initCommands() {
 }
 
 void CommandMgr::disable() {
-
 }
 
 std::vector<IMCCommand*>* CommandMgr::getCommandList() {
 	return &commandList;
 }
 
-void CommandMgr::execute(char * message) {
+void CommandMgr::execute(char* message) {
 	if (message != nullptr) {
 		std::vector<std::string>* args = new std::vector<std::string>();
 		std::string msgStr = message + 1;
@@ -64,7 +63,7 @@ void CommandMgr::execute(char * message) {
 
 		std::string cmd = ((*args)[0]);
 		std::transform(cmd.begin(), cmd.end(), cmd.begin(), ::tolower);
-		
+
 		for (std::vector<IMCCommand*>::iterator it = this->commandList.begin(); it != this->commandList.end(); ++it) {
 			IMCCommand* c = *it;
 			auto* aliases = c->getAliasList();
@@ -80,7 +79,6 @@ void CommandMgr::execute(char * message) {
 					goto done;
 				}
 			}
-			
 		}
 
 		g_Data.getClientInstance()->getGuiData()->displayClientMessageF("[%sHorion%s] %sCommand '%s' could not be found!", GOLD, WHITE, RED, cmd.c_str());

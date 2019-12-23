@@ -283,7 +283,6 @@ public:
 
 	// https://stackoverflow.com/a/34571089
 	static std::string base64_encode(const std::string& in) {
-
 		std::string out;
 
 		int val = 0, valb = -6;
@@ -301,7 +300,6 @@ public:
 	}
 
 	static std::string base64_decode(const std::string& in) {
-
 		std::string out;
 
 		std::vector<int> T(256, -1);
@@ -355,7 +353,7 @@ public:
 
 			if (oldPat != pattern) {
 				oldPat = pattern;
-				if(*(PBYTE)pattern != '\?')
+				if (*(PBYTE)pattern != '\?')
 					patByte = GET_BYTE(pattern);
 			}
 
@@ -371,7 +369,7 @@ public:
 				//pattern += 3;
 
 				//else
-					pattern += 2;
+				pattern += 2;
 			}
 			else {
 				pattern = szSignature;
@@ -406,12 +404,10 @@ public:
 		localtime_s(&timeInfo, &now_c); // using localtime_s as std::localtime is not thread-safe.
 	};
 
-
-	static void ApplySystemTime(std::stringstream *ss) {
-
+	static void ApplySystemTime(std::stringstream* ss) {
 		using namespace std::chrono;
 #ifdef _DEBUG
-		const std::chrono::system_clock::time_point systemNow = system_clock::now(); 
+		const std::chrono::system_clock::time_point systemNow = system_clock::now();
 		auto ms = duration_cast<milliseconds>(systemNow.time_since_epoch()) % 10000;
 		time_t now_c = system_clock::to_time_t(systemNow);
 		tm timeInfo{ };

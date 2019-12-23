@@ -1,16 +1,12 @@
 #include "TeleportCommand.h"
 
-
-
 TeleportCommand::TeleportCommand() : IMCCommand("tp", "Teleports to coordinates", "<X> <Y> <Z>") {
 	registerAlias("teleport");
 	registerAlias("setpos");
 }
 
-
 TeleportCommand::~TeleportCommand() {
 }
-
 
 bool TeleportCommand::execute(std::vector<std::string>* args) {
 	assertTrue(g_Data.getClientInstance()->getLocalPlayer() != nullptr);

@@ -1,12 +1,10 @@
 #include "AutoClicker.h"
 
-
 AutoClicker::AutoClicker() : IModule(0x0, Category::COMBAT, "A simple autoclicker, automatically clicks for you.") {
 	this->registerBoolSetting("rightclick", &this->rightclick, rightclick);
 	this->registerIntSetting("delay", &this->delay, this->delay, 0, 20);
 	this->registerBoolSetting("only swords/axes", &this->sword, this->sword);
 }
-
 
 AutoClicker::~AutoClicker() {
 }
@@ -23,9 +21,9 @@ void AutoClicker::onTick(C_GameMode* gm) {
 		Odelay++;
 
 		if (Odelay >= delay) {
-			if (sword && !(localPlayer->itemId == 268 || localPlayer->itemId == 267 || localPlayer->itemId == 272 
-				|| localPlayer->itemId == 276 || localPlayer->itemId == 283 /*swords*/ 
-				|| localPlayer->itemId == 271 || localPlayer->itemId == 275 || localPlayer->itemId == 279 
+			if (sword && !(localPlayer->itemId == 268 || localPlayer->itemId == 267 || localPlayer->itemId == 272
+				|| localPlayer->itemId == 276 || localPlayer->itemId == 283 /*swords*/
+				|| localPlayer->itemId == 271 || localPlayer->itemId == 275 || localPlayer->itemId == 279
 				|| localPlayer->itemId == 286 || localPlayer->itemId == 258 /*axes*/))
 				return;
 

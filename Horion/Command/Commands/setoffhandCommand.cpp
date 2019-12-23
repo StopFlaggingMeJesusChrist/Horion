@@ -2,12 +2,9 @@
 #include <vector>
 #include <string>
 
-
-
 setoffhandCommand::setoffhandCommand() : IMCCommand("setoffhand", "Puts any item into offhand", "<ItemName> <count> <itemData>") {
 	registerAlias("soh");
 }
-
 
 setoffhandCommand::~setoffhandCommand() {
 }
@@ -105,7 +102,6 @@ bool setoffhandCommand::execute(std::vector<std::string>* args) {
 
 	if (stackItem != nullptr)
 		stackItem->count = count;
-
 
 	g_Data.getLocalPlayer()->setOffhandSlot(stackItem);
 	clientMessageF("%sSet item as offhand!", BLUE);

@@ -1,9 +1,7 @@
 #include "TestCommand.h"
 
-
 TestCommand::TestCommand() : IMCCommand("test", "Test for Debugging purposes", "") {
 }
-
 
 TestCommand::~TestCommand() {
 }

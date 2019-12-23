@@ -1,7 +1,6 @@
 #pragma once
 #include "Module.h"
 
-
 class InstaBreak :
 	public IModule
 {
@@ -11,4 +10,3 @@ public:
 	// Inherited via IModule
 	virtual const char* getModuleName() override;
 };
-

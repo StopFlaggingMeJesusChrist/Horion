@@ -15,7 +15,7 @@
 #include <windows.h>	//Windows-functions (OpenProcess, RPM, WPM, etc)
 #include <tlhelp32.h>	//Functions that gather process-information
 #include <Psapi.h>		//Functions that gather module-information
-#include <map>			//Data-container that saves parsed modules 
+#include <map>			//Data-container that saves parsed modules
 #include <string>		//String/WString implementation
 #include <cctype>		//tolower-function that converts a char to lowercase
 #include <algorithm>	//transform-function that is used to apply the tolower-function to a wstring
@@ -26,7 +26,6 @@
 #include <vector>
 
 namespace SlimUtils {
-
 	//Exclude module-names from SlimModule-structs
 #define VERYSLIM_SLIMMODULE
 	//Enable error-reports
@@ -39,7 +38,6 @@ namespace SlimUtils {
 		assert(b);
 		return b;
 	}
-
 
 	static std::wstring ToLower(std::wstring string) {
 		transform(string.begin(), string.end(), string.begin(), tolower);
@@ -70,7 +68,7 @@ namespace SlimUtils {
 	*/
 	struct SigScanResult {
 		bool m_Success;
-		BYTE *m_Data = 0;
+		BYTE* m_Data = 0;
 		DWORD m_DataLength;
 		DWORD m_Offset;
 
@@ -80,7 +78,7 @@ namespace SlimUtils {
 		SigScanResult(bool p_Success) : m_Success(p_Success), m_Offset(0), m_DataLength(0), m_Data(nullptr) {
 		}
 
-		SigScanResult(bool p_Success, DWORD p_Offset, BYTE *p_Data, DWORD p_DataLength) : m_Success(p_Success), m_Offset(p_Offset), m_DataLength(p_DataLength) {
+		SigScanResult(bool p_Success, DWORD p_Offset, BYTE* p_Data, DWORD p_DataLength) : m_Success(p_Success), m_Offset(p_Offset), m_DataLength(p_DataLength) {
 			if (p_Data != nullptr) {
 				m_Data = new BYTE[m_DataLength];
 				memcpy_s(m_Data, m_DataLength, p_Data, m_DataLength);
@@ -156,16 +154,16 @@ namespace SlimUtils {
 		bool HasProcessHandle() const { return IsProcessHandleValid(m_hProc); }
 		const SlimModule* GetModule(const wchar_t* lpwstrModuleName) const;
 		bool ParseModules();
-		SigScanResult PerformSigScan(const BYTE * bufPattern, const char * lpcstrMask, const SlimModule * Module, DWORD startFromOffset);
+		SigScanResult PerformSigScan(const BYTE* bufPattern, const char* lpcstrMask, const SlimModule* Module, DWORD startFromOffset);
 
 		template <typename T>
 		T Read(std::uintptr_t ptrAddress) const;
 
-//		template <typename T>
-		//bool Read(std::uintptr_t ptrAddress, T& value) const;
+		//		template <typename T>
+				//bool Read(std::uintptr_t ptrAddress, T& value) const;
 
-		//BYTE* ReadRaw(std::uintptr_t ptrAddress, int size) const;
-		//wchar_t * ReadRawWide(std::uintptr_t ptrAddress, int size) const;
+				//BYTE* ReadRaw(std::uintptr_t ptrAddress, int size) const;
+				//wchar_t * ReadRawWide(std::uintptr_t ptrAddress, int size) const;
 
 		template <typename T>
 		T ReadPtr(std::uintptr_t ptrAddress, std::initializer_list<std::uintptr_t> ilOffsets) const;
@@ -181,8 +179,6 @@ namespace SlimUtils {
 		DWORD m_dwPID;
 		std::map<std::wstring, std::unique_ptr<SlimModule>> m_mModules;
 	private:
-
-
 	};
 
 #pragma region Read/Write
@@ -221,8 +217,6 @@ namespace SlimUtils {
 		return ReadProcessMemory(m_hProc, (LPCVOID)ptrAddress, &value, sizeof(T), &bytesRead) && bytesRead == sizeof(T);
 	}
 
-
-
 	/*inline BYTE * SlimMem::ReadRaw(std::uintptr_t ptrAddress, int size) const
 	{
 		//static_assert(std::is_trivially_copyable<T>::value, "Invalid RPM/WPM type");
@@ -230,7 +224,6 @@ namespace SlimUtils {
 		BYTE* arr = new BYTE[size];
 		if (!this->HasProcessHandle())
 			return arr;
-
 
 		ReadProcessMemory(this->m_hProc, (LPCVOID)ptrAddress, (LPVOID)arr, size, NULL);
 		return arr;
@@ -269,7 +262,6 @@ namespace SlimUtils {
 				//Read offset
 				//std::cout << "yee: " << std::hex << ptrAddress << ":" << std::hex << *it << std::endl;
 				ptrAddress = this->Read<std::uintptr_t>(ptrAddress + *it);
-
 			}
 		}
 		return T();

@@ -6,13 +6,12 @@ private:
 public:
 	union {
 		struct {
-			bool leftClickDown; //0x0050 
-			bool rightClickDown; //0x0051 
-			bool wheelDown; //0x0052 
-			bool mouse4Down; //0x0053 
-			bool mouse5Down; //0x0054 
+			bool leftClickDown; //0x0050
+			bool rightClickDown; //0x0051
+			bool wheelDown; //0x0052
+			bool mouse4Down; //0x0053
+			bool mouse5Down; //0x0054
 		};
 		bool clickMap[5];
 	};
-	
 };

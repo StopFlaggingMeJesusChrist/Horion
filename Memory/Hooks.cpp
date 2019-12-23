@@ -6,7 +6,6 @@ bool isTicked = false;
 
 void Hooks::Init() {
 	logF("Setting up Hooks..."); {
-
 		// Vtables
 		// GameMode::vtable
 		{
@@ -66,7 +65,7 @@ void Hooks::Init() {
 			}
 		}
 	}
-	
+
 	// Signatures
 	{
 		void* surv_tick = reinterpret_cast<void*>(Utils::FindSignature("48 8B C4 55 57 41 56 48 8D 68 A1 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? ?? 48 89 58 ?? 48 89 70 ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 48 8B F9 8B 41"));
@@ -74,13 +73,13 @@ void Hooks::Init() {
 
 		void* _sendChatMessage = reinterpret_cast<void*>(Utils::FindSignature("40 57 48 83 EC ?? 48 C7 44 24 ?? FE FF FF FF 48 89 9C 24 ?? ?? 00 00 48 8B D9 48 83 B9"));
 		g_Hooks.ChatScreenController_sendChatMessageHook = std::make_unique<FuncHook>(_sendChatMessage, Hooks::ChatScreenController_sendChatMessage);
-		
+
 		void* _renderText = reinterpret_cast<void*>(Utils::FindSignature("48 8B C4 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 C7 45 ?? FE FF FF FF 48 89 58 ?? 0F 29 70 ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 48 89 54 24"));
 		g_Hooks.RenderTextHook = std::make_unique<FuncHook>(_renderText, Hooks::RenderText);
-		
+
 		void* setupRender = reinterpret_cast<void*>(Utils::FindSignature("40 57 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 ?? ?? ?? ?? ?? ?? ?? ?? 48 8B DA 48 8B F9 33 D2 ?? ?? ?? ?? ?? ?? 48 8D 4C 24 30 E8 ?? ?? ?? ?? 4C 8B CF 4C 8B C3 48 8B 57 ?? 48 8D 4C 24 ??"));
 		g_Hooks.UIScene_setupAndRenderHook = std::make_unique<FuncHook>(setupRender, Hooks::UIScene_setupAndRender);
-		
+
 		void* render = reinterpret_cast<void*>(Utils::FindSignature("40 56 57 41 56 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 ?? ?? ?? ?? ?? ?? ?? ?? 48 8B FA 48 8B D9 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 48 8B 30 41 8B 04 36 39 05 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 33 C0"));
 		g_Hooks.UIScene_renderHook = std::make_unique<FuncHook>(render, Hooks::UIScene_render);
 
@@ -91,7 +90,6 @@ void Hooks::Init() {
 		g_Hooks.Dimension_getTimeOfDayHook = std::make_unique<FuncHook>(timeOfDay, Hooks::Dimension_getTimeOfDay);
 
 		void* sunLightIntensity = reinterpret_cast<void*>(Utils::FindSignature("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B B9 ?? ?? ?? ?? 49 8B D8 0F"));
-
 
 		void* ChestTick = reinterpret_cast<void*>(Utils::FindSignature("40 53 57 48 83 EC ?? 48 8B 41 ?? 48 8B FA 48 89 6C 24 ?? 48 8B D9 4C 89 74 24 ?? 48 85 C0 75 10 48 8D 51 ?? 48 8B CF E8 ?? ?? ?? ?? 48 89 43 ?? FF 43 ?? 48 85 C0"));
 		g_Hooks.ChestBlockActor_tickHook = std::make_unique <FuncHook>(ChestTick, Hooks::ChestBlockActor_tick);
@@ -268,7 +266,6 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 	DrawUtils::setCtx(renderCtx, dat);
 	if (GameData::shouldHide())
 		return oText(a1, renderCtx); {
-
 		static bool wasConnectedBefore = false;
 		static LARGE_INTEGER start;
 		static LARGE_INTEGER frequency;
@@ -285,11 +282,11 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 			elapsed.QuadPart /= frequency.QuadPart;
 			if (elapsed.QuadPart > 1) {
 				vec2_t windowSize = dat->windowSize;
-				
+
 				DrawUtils::fillRectangle(vec4_t(0, 0, windowSize.x, windowSize.y), MC_Color(0.2f, 0.2f, 0.2f, 1.f), 0.8f);
 
 				std::string text = "Download the new injector at http://horionbeta.club/";
-				if(!wasConnectedBefore)
+				if (!wasConnectedBefore)
 					DrawUtils::drawText(vec2_t(windowSize.x / 2 - DrawUtils::getTextWidth(&text, 1.5f) / 2, windowSize.y * 0.4f), &text, nullptr, 1.5f);
 				text = "Remember to keep the injector open while playing";
 				DrawUtils::drawText(vec2_t(windowSize.x / 2 - DrawUtils::getTextWidth(&text, wasConnectedBefore ? 1.5f : 0.7f) / 2, windowSize.y * (wasConnectedBefore ? 0.5f : 0.7f)), &text, nullptr, wasConnectedBefore ? 1.5f : 0.7f);
@@ -300,7 +297,8 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 			}
 
 			return retval;
-		}else
+		}
+		else
 			wasConnectedBefore = true;
 	}
 
@@ -371,8 +369,8 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 		if (hud == nullptr)
 			hud = moduleMgr->getModule<HudModule>();
 		else if (hud->watermark && hud->isEnabled()) {
-		DrawUtils::drawText(vec2_t(windowSize.x - horionStrWidth * 1.5f - 2.f, windowSize.y - 22.f), &horionStr, nullptr, 1.5f);
-		DrawUtils::drawText(vec2_t(windowSize.x - dlStrWidth * 0.85f - 2.f, windowSize.y - 10.75f), &dlStr, nullptr, 0.85f);
+			DrawUtils::drawText(vec2_t(windowSize.x - horionStrWidth * 1.5f - 2.f, windowSize.y - 22.f), &horionStr, nullptr, 1.5f);
+			DrawUtils::drawText(vec2_t(windowSize.x - dlStrWidth * 0.85f - 2.f, windowSize.y - 10.75f), &dlStr, nullptr, 0.85f);
 		}
 
 		// Draw ArrayList
@@ -403,7 +401,6 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 				}
 
 				bool operator<(const IModuleContainer& other) const {
-
 					if (enabled) {
 						if (!other.enabled) // We are enabled
 							return true;
@@ -450,7 +447,6 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 
 			// Loop through mods to display Labels
 			for (std::set<IModuleContainer>::iterator it = modContainerList.begin(); it != modContainerList.end(); ++it) {
-
 				if (!extendedArraylist && !it->enabled)
 					continue;
 
@@ -480,7 +476,6 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 
 				DrawUtils::drawText(textPos, &textStr, new MC_Color(currColor), textSize);
 				if (!GameData::canUseMoveKeys() && rectPos.contains(&mousePos) && hud->clickToggle) {
-
 					if (leftMouseDown) {
 						DrawUtils::fillRectangle(rectPos, MC_Color(0.4f, 0.9f, 0.4f, 0.1f), it->enabled ? 0.6f : 0.6f);
 						if (executeClick)
@@ -503,7 +498,6 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 			DrawUtils::drawText(vec2_t(5.f, shouldRenderTabGui ? windowSize.y - 12.f : 2.f), &coords, nullptr, 1.f);
 		}
 	}
-
 
 	DrawUtils::flush();
 
@@ -570,7 +564,7 @@ float Hooks::Dimension_getTimeOfDay(__int64 _this, int a2, float a3) {
 		return 0.5f;
 	}
 #endif
-	
+
 	return oGetTimeOfDay(_this, a2, a3);
 }
 
@@ -745,7 +739,6 @@ void Hooks::LoopbackPacketSender_sendToServer(C_LoopbackPacketSender* a, C_Packe
 		return;
 	}
 	else if (FreecamMod->isEnabled() || BlinkMod->isEnabled()) {
-
 		if (packet->isInstanceOf<C_MovePlayerPacket>() || packet->isInstanceOf<PlayerAuthInputPacket>()) {
 			if (BlinkMod->isEnabled()) {
 				if (packet->isInstanceOf<C_MovePlayerPacket>()) {
@@ -761,7 +754,6 @@ void Hooks::LoopbackPacketSender_sendToServer(C_LoopbackPacketSender* a, C_Packe
 		}
 	}
 	else if (!BlinkMod->isEnabled()) {
-
 		if (BlinkMod->getMovePlayerPacketHolder()->size() > 0) {
 			for (auto it : *BlinkMod->getMovePlayerPacketHolder()) {
 				oFunc(a, (it));
@@ -883,7 +875,7 @@ int Hooks::BlockLegacy_getRenderLayer(C_BlockLegacy* a1) {
 			if (strcmp(text, "lava") != NULL)
 				if (strcmp(text, "water") != NULL)
 					if (strcmp(text, "bedrock") != NULL) // lol added bedrock xray from suggestions
-					return 10;
+						return 10;
 	}
 	return oFunc(a1);
 }
@@ -928,7 +920,6 @@ __int64 Hooks::LevelRenderer_renderLevel(__int64 _this, __int64 a2, __int64 a3) 
 }
 
 void Hooks::ClickFunc(__int64 a1, char a2, char a3, __int16 a4, __int16 a5, __int16 a6, __int16 a7, char a8) {
-
 	static auto oFunc = g_Hooks.ClickFuncHook->GetFastcall<void, __int64, char, char, __int16, __int16, __int16, __int16, char>();
 	static IModule* clickGuiModule = moduleMgr->getModule<ClickGuiMod>();
 
@@ -978,11 +969,8 @@ __int64 Hooks::GetGamma(__int64 a1) {
 	}
 	else {
 		if (fullBrightModule != nullptr) {
-
 			fullBrightModule->gammaPtr = reinterpret_cast<float*>(v7 + 0xF0);
-			
 		}
-			
 	}
 
 	return oFunc(a1);
@@ -1032,7 +1020,6 @@ void Hooks::Actor_ladderUp(C_Entity* _this) {
 		return;
 	}
 	return oFunc(_this);
-
 }
 
 void Hooks::Actor_startSwimming(C_Entity* _this) {
@@ -1047,10 +1034,10 @@ void Hooks::Actor_startSwimming(C_Entity* _this) {
 	oFunc(_this);
 }
 
-void Hooks::RakNetInstance_tick(C_RakNetInstance* _this,__int64 a2,__int64 a3) {
-	static auto oTick = g_Hooks.RakNetInstance_tickHook->GetFastcall<void, C_RakNetInstance*,__int64,__int64>();
+void Hooks::RakNetInstance_tick(C_RakNetInstance* _this, __int64 a2, __int64 a3) {
+	static auto oTick = g_Hooks.RakNetInstance_tickHook->GetFastcall<void, C_RakNetInstance*, __int64, __int64>();
 	GameData::setRakNetInstance(_this);
-	oTick(_this,a2,a3);
+	oTick(_this, a2, a3);
 }
 
 float Hooks::GameMode_getPickRange(C_GameMode* _this, __int64 a2, char a3) {
@@ -1100,7 +1087,7 @@ __int64 Hooks::ConnectionRequest_create(__int64 _this, __int64 privateKeyManager
 
 	__int64 res = oFunc(_this, privateKeyManager, a3, selfSignedId, serverAddress, clientRandomId, skinId, newSkinData, capeData, animatedImageDataArr, newSkinResourcePatch, newGeometryData, skinAnimationData, isPremiumSkin, isPersonaSkin, deviceId, inputMode, uiProfile, guiScale, languageCode, sendEduModeParams, tenantId, unused, platformUserId, thirdPartyName, thirdPartyNameOnly, platformOnlineId, platformOfflineId, isCapeOnClassicSkin, capeId);
 
-	if(hMemoryGeometry)
+	if (hMemoryGeometry)
 		FreeResource(hMemoryGeometry);
 	if (hMemorySteve)
 		FreeResource(hMemorySteve);

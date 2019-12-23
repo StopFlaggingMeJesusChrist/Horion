@@ -1,7 +1,5 @@
 #include "Aimbot.h"
 
-
-
 Aimbot::Aimbot() : IModule('M', Category::COMBAT, "Automatically aims at the nearest entity") {
 	this->registerFloatSetting("range", &this->range, this->range, 3.f, 8.f);
 	this->registerBoolSetting("Require click", &this->click, this->click);
@@ -21,7 +19,7 @@ const char* Aimbot::getModuleName() {
 }
 
 struct CompareTargetEnArray {
-	bool operator() (C_Entity *lhs, C_Entity *rhs) {
+	bool operator() (C_Entity* lhs, C_Entity* rhs) {
 		C_LocalPlayer* localPlayer = g_Data.getLocalPlayer();
 		return (*lhs->getPos()).dist(*localPlayer->getPos()) < (*rhs->getPos()).dist(*localPlayer->getPos());
 	}
@@ -66,10 +64,7 @@ void Aimbot::onPostRender() {
 		vec2_t appl = angle.sub(localPlayer->viewAngles).normAngles();
 		appl.x = -appl.x;
 
-
-
 		if ((appl.x < verticalrange && appl.x > -verticalrange) && (appl.y < horizontalrange && appl.y > -horizontalrange) && GameData::canUseMoveKeys()) {
-
 			if (sword && !(localPlayer->itemId == 268 || localPlayer->itemId == 267 || localPlayer->itemId == 272 || localPlayer->itemId == 276 || localPlayer->itemId == 283 /*swords*/ || localPlayer->itemId == 271 || localPlayer->itemId == 275 || localPlayer->itemId == 279 || localPlayer->itemId == 286 || localPlayer->itemId == 258 /*axes*/))
 				return;
 

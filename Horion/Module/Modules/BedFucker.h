@@ -22,4 +22,3 @@ public:
 	virtual void onDisable() override;
 	int delay = 0;
 };
-

@@ -1,10 +1,7 @@
 #include "FastEat.h"
 
-
-
 FastEat::FastEat() : IModule(0x0, Category::PLAYER, "Eat food almost instantly!") {
 }
-
 
 FastEat::~FastEat() {
 }

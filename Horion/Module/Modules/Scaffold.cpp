@@ -4,7 +4,6 @@ Scaffold::Scaffold() : IModule(VK_NUMPAD1, Category::BUILD, "Automatically build
 	registerBoolSetting("AutoSelect", &this->autoselect, this->autoselect);
 }
 
-
 Scaffold::~Scaffold() {
 }
 
@@ -23,7 +22,6 @@ bool Scaffold::tryScaffold(vec3_t blockBelow) {
 	C_BlockLegacy* blockLegacy = *(block->blockLegacy);
 	//logF("blockLegacy: %llX", blockLegacy);
 	if (blockLegacy->material->isReplaceable) {
-		
 		vec3_ti* blok = new vec3_ti(blockBelow);
 
 		// Find neighbour
@@ -65,7 +63,7 @@ bool Scaffold::tryScaffold(vec3_t blockBelow) {
 				g_Data.getCGameMode()->buildBlock(blok, i);
 			}
 			delete blok;
-			
+
 			return true;
 		}
 		delete blok;
@@ -99,15 +97,14 @@ void Scaffold::onPostRender() {
 		return;
 
 	vec3_t blockBelow = g_Data.getLocalPlayer()->eyePos0; // Block below the player
-	blockBelow.y -= g_Data.getLocalPlayer()->height;     
+	blockBelow.y -= g_Data.getLocalPlayer()->height;
 	blockBelow.y -= 0.5f;
-
 
 	// Adjustment by velocity
 	float speed = g_Data.getLocalPlayer()->velocity.magnitudexz();
 	vec3_t vel = g_Data.getLocalPlayer()->velocity;
 	vel.normalize(); // Only use values from 0 - 1
-	
+
 	DrawUtils::setColor(0.3f, 0.2f, 0.8f, 1);
 	if (!tryScaffold(blockBelow)) {
 		if (speed > 0.05f) { // Are we actually walking?
@@ -122,6 +119,5 @@ void Scaffold::onPostRender() {
 				}
 			}
 		}
-		
 	}
 }

@@ -1,17 +1,14 @@
 #include "UnbindCommand.h"
 
-
-
 UnbindCommand::UnbindCommand() : IMCCommand("unbind", "unbind modules", "<module | all>") {
 }
-
 
 UnbindCommand::~UnbindCommand() {
 }
 
 bool UnbindCommand::execute(std::vector<std::string>* args) {
 	assertTrue(args->size() >= 2);
-	std::string moduleName = args->at(1); 
+	std::string moduleName = args->at(1);
 
 	if (moduleName.size() > 0) {
 		IModule* mod = moduleMgr->getModuleByName(moduleName);

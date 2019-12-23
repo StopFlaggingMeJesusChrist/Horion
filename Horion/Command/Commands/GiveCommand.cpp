@@ -1,10 +1,7 @@
 #include "GiveCommand.h"
 
-
-
 GiveCommand::GiveCommand() : IMCCommand("give", "Spawn in items.", "<itemName> <count> <itemData>") {
 }
-
 
 GiveCommand::~GiveCommand() {
 }
@@ -33,13 +30,13 @@ bool GiveCommand::execute(std::vector<std::string>* args) {
 	static uintptr_t** VanillaBlocks__mDirtPtr = 0x0;
 	static uintptr_t** VanillaItems__mShovel_ironPtr = 0x0;
 
-	using getItemFromId_t = C_Item***(__fastcall*)(void*, int itemID);
+	using getItemFromId_t = C_Item * **(__fastcall*)(void*, int itemID);
 	static getItemFromId_t  getItemFromId = reinterpret_cast<getItemFromId_t>(Utils::FindSignature("40 53 48 83 EC ?? 48 8B D9 66 85 D2 0F 84 ?? ?? ?? ?? 44 0F BF C2 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 44 89 44 24 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 41 0F B6 D0 48 33 D0 0F B6 44 24 ??"));
 
 	if (VanillaBlocks__mDirtPtr == 0x0) {
 		uintptr_t sigOffset = Utils::FindSignature("48 8B 05 ?? ?? ?? ?? 48 8B 08 48 8D 42 FF ?? ?? ?? ?? ?? ?? 49 3B C0");
 		int offset = *reinterpret_cast<int*>(sigOffset + 3);
-		VanillaBlocks__mDirtPtr = reinterpret_cast<uintptr_t * *>(sigOffset + offset + /*length of instruction*/ 7);
+		VanillaBlocks__mDirtPtr = reinterpret_cast<uintptr_t**>(sigOffset + offset + /*length of instruction*/ 7);
 		if (VanillaBlocks__mDirtPtr == 0x0 || sigOffset == 0x0)
 			logF("VanillaBlocks sig not working!!!");
 	}
@@ -47,7 +44,7 @@ bool GiveCommand::execute(std::vector<std::string>* args) {
 	if (VanillaItems__mShovel_ironPtr == 0x0) {
 		uintptr_t sigOffset = Utils::FindSignature("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 90 ?? ?? ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 90 ?? ?? ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 90 ?? ?? ?? ?? ?? ?? ?? E8");
 		int offset = *reinterpret_cast<int*>(sigOffset + 3);
-		VanillaItems__mShovel_ironPtr = reinterpret_cast<uintptr_t * *>(sigOffset + offset + /*length of instruction*/ 7);
+		VanillaItems__mShovel_ironPtr = reinterpret_cast<uintptr_t**>(sigOffset + offset + /*length of instruction*/ 7);
 		if (VanillaItems__mShovel_ironPtr == 0x0 || sigOffset == 0x0)
 			logF("VanillaItems sig not working!!!");
 	}

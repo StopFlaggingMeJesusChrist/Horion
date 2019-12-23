@@ -114,4 +114,3 @@ public:
 	virtual void onSendPacket(C_Packet*);
 	const char* getTooltip();
 };
-

@@ -17,7 +17,6 @@ public:
 	bool isMobAura = false;
 	float range = 6;
 
-
 	Killaura();
 	~Killaura();
 
@@ -27,4 +26,3 @@ public:
 	virtual void onEnable() override;
 	virtual void onSendPacket(C_Packet* packet) override;
 };
-

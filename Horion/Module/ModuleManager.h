@@ -101,9 +101,9 @@ public:
 	int getEnabledModuleCount();
 
 	/*
-	 *	Use as follows: 
-	 *		IModule* mod = moduleMgr.getModule<NoKnockBack>(); 
-	 *	Check for nullptr directly after that call, as Hooks::init is called before ModuleManager::initModules !	
+	 *	Use as follows:
+	 *		IModule* mod = moduleMgr.getModule<NoKnockBack>();
+	 *	Check for nullptr directly after that call, as Hooks::init is called before ModuleManager::initModules !
 	 */
 	template<typename TRet>
 	TRet* getModule() {
@@ -129,7 +129,6 @@ public:
 			std::transform(modNameCopy.begin(), modNameCopy.end(), modNameCopy.begin(), ::tolower);
 			if (modNameCopy == nameCopy)
 				return mod;
-			
 		}
 		return nullptr;
 	}

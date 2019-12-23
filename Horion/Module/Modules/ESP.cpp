@@ -1,12 +1,9 @@
 #include "ESP.h"
 
-
-
-ESP::ESP() : IModule('O', Category::VISUAL,"Makes it easier to find entities around you") {
+ESP::ESP() : IModule('O', Category::VISUAL, "Makes it easier to find entities around you") {
 	this->registerBoolSetting("rainbow", &this->doRainbow, this->doRainbow);
 	this->registerBoolSetting("MobEsp", &this->isMobEsp, this->isMobEsp);
 }
-
 
 ESP::~ESP() {
 }
@@ -53,11 +50,9 @@ void doRenderStuff(C_Entity* ent, bool isRegularEntitie) {
 }
 
 void ESP::onPostRender() {
-
 	C_LocalPlayer* localPlayer = g_Data.getLocalPlayer();
 
 	if (localPlayer != nullptr && GameData::canUseMoveKeys()) {
-
 		// Rainbow colors
 		{
 			if (rcolors[3] < 1) {

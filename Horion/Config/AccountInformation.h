@@ -23,4 +23,3 @@ public:
 	static AccountInformation fromToken(std::string discordToken, unsigned int serial);
 	static AccountInformation asGuest();
 };
-

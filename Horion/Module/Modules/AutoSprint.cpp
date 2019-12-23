@@ -3,7 +3,6 @@
 AutoSprint::AutoSprint() : IModule(0x0, Category::MOVEMENT, "Automatically sprint without holding the key") {
 }
 
-
 AutoSprint::~AutoSprint() {
 }
 
